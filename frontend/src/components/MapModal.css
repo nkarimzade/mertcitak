@@ -1,0 +1,288 @@
+/* Apple & Luxury Architectural Split Map Modal */
+.luxury-map-modal {
+  position: relative;
+  width: 94%;
+  max-width: 980px;
+  min-height: 520px;
+  background-color: #faf8f5;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  display: flex;
+  animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1001;
+}
+
+/* Floating Circular Close Button */
+.luxury-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1d1d1f;
+  z-index: 20;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.luxury-modal-close:hover {
+  background-color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Left Panel: Info, Branding, Details */
+.map-modal-info-panel {
+  width: 420px;
+  flex-shrink: 0;
+  background-color: #faf8f5;
+  border-right: 1px solid rgba(23, 21, 19, 0.08);
+  padding: 38px 34px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.info-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+
+.info-badge-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #746d65;
+  text-transform: uppercase;
+}
+
+.info-modal-title {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #171513;
+  margin: 0 0 20px 0;
+}
+
+/* Address Card */
+.info-address-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(23, 21, 19, 0.09);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.address-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.pin-icon {
+  color: #b0875c;
+}
+
+.address-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #8c857c;
+}
+
+.address-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #2e2a26;
+  margin: 0 0 12px 0;
+}
+
+.btn-copy-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f5f4f0;
+  border: 1px solid rgba(23, 21, 19, 0.1);
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4a453f;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-address:hover {
+  background-color: #eae7e0;
+  color: #171513;
+}
+
+/* Specs list */
+.info-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.spec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.spec-icon {
+  color: #746d65;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.spec-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #635e57;
+  letter-spacing: 0.02em;
+}
+
+.spec-desc {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12.5px;
+  color: #171513;
+  font-weight: 500;
+}
+
+/* Primary CTA Button */
+.btn-luxury-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 20px;
+  background-color: #171513;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.btn-luxury-route:hover {
+  background-color: #2e2a26;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-luxury-route svg {
+  transition: transform 0.2s ease;
+}
+
+.btn-luxury-route:hover svg {
+  transform: translateX(3px);
+}
+
+/* Right Panel: Edge-to-Edge Map Frame */
+.map-modal-frame-panel {
+  position: relative;
+  flex: 1;
+  min-height: 480px;
+  background-color: #e5e5ea;
+}
+
+.floating-map-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #1d1d1f;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+
+.live-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.25);
+}
+
+.full-bleed-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive (Mobile & Tablet) */
+@media (max-width: 860px) {
+  .luxury-map-modal {
+    flex-direction: column-reverse;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .map-modal-info-panel {
+    width: 100%;
+    border-right: none;
+    border-top: 1px solid rgba(23, 21, 19, 0.08);
+    padding: 24px 20px;
+  }
+
+  .map-modal-frame-panel {
+    min-height: 280px;
+    height: 280px;
+    flex: none;
+  }
+}

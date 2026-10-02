@@ -1,0 +1,631 @@
+/* ============================================================
+   MERT ÇITAK CLINIC HAKKINDA — DUAL DESKTOP & MOBILE STORY
+   Desktop (>880px): 420vh Sticky physical storytelling (Text Left, Image Right)
+   Mobile (<=880px): Built from scratch natural flow (NO scroll hijacking)
+   ============================================================ */
+
+.about-unified-container {
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* ============================================================
+   DESKTOP STORY VIEW (> 880px)
+   ============================================================ */
+.about-desktop-story {
+  position: relative;
+  width: 100%;
+  height: 420vh;
+  background-color: #ffffff;
+  color: #111111;
+  box-sizing: border-box;
+}
+
+/* Sticky Viewport Container (100vh) */
+.about-sticky-viewport {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 0 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #ffffff;
+  z-index: 15;
+}
+
+/* Top Minimal Navigation Bar */
+.about-topbar {
+  max-width: 1520px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 80px 0 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.about-topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.about-topbar-name {
+  color: #111111;
+}
+
+.about-topbar-meta {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #86868b;
+  text-transform: uppercase;
+}
+
+/* Main Stage on Desktop */
+.about-stage-wrapper {
+  position: relative;
+  max-width: 1520px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 80px 0 88px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(48px, 6vw, 96px);
+  box-sizing: border-box;
+  min-height: 600px;
+}
+
+/* Left Column: Text Window */
+.about-text-column {
+  flex: 1;
+  max-width: 580px;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.about-text-window {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 46vh, 460px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.story-text-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  will-change: transform, opacity;
+  box-sizing: border-box;
+  padding-right: 16px;
+}
+
+.chapter-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.eyebrow-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #86868b;
+}
+
+.chapter-headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(34px, 3.8vw, 56px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #111111;
+  margin: 0 0 22px;
+}
+
+.headline-line {
+  display: block;
+}
+
+.chapter-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14.5px, 1.15vw, 16px);
+  line-height: 1.65;
+  color: #6e6e73;
+  max-width: 500px;
+  margin: 0;
+}
+
+/* Right Column: Fixed Image Frame */
+.about-image-column {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 6;
+  box-sizing: border-box;
+}
+
+.about-image-frame {
+  position: relative;
+  width: clamp(420px, 37vw, 520px);
+  height: clamp(500px, 64vh, 620px);
+  border-radius: 36px;
+  background-color: #f7f7f9;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08),
+              0 0 0 1px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.story-image-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 36px;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Luxury Editorial Placeholder */
+.story-placeholder-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(150deg, #ffffff 0%, #f4f4f7 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 36px;
+  border: 1px solid #e5e5ea;
+  box-sizing: border-box;
+  padding: 32px;
+  user-select: none;
+  overflow: hidden;
+}
+
+.placeholder-ambient-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.025) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.placeholder-content-box {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.placeholder-icon-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e5ea;
+}
+
+.placeholder-main-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+.placeholder-sub-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #86868b;
+}
+
+.image-overlay-badge {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.badge-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+/* Stepper Line for Desktop */
+.about-stepper-track-wrap {
+  position: absolute;
+  right: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  z-index: 25;
+}
+
+.stepper-track-line {
+  width: 2px;
+  height: 96px;
+  background-color: #e5e5ea;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stepper-track-fill {
+  width: 100%;
+  height: 100%;
+  background-color: #111111;
+  transform-origin: top center;
+  transform: scaleY(0.25);
+  border-radius: 999px;
+  will-change: transform;
+}
+
+/* Hide Mobile Story View on Desktop */
+.about-mobile-story {
+  display: none;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Tablets)
+   ============================================================ */
+@media (max-width: 1200px) {
+  .about-topbar,
+  .about-stage-wrapper {
+    padding: 0 44px;
+    gap: 40px;
+  }
+
+  .about-text-column {
+    width: 48%;
+  }
+
+  .about-image-frame {
+    width: clamp(380px, 40vw, 460px);
+    height: 520px;
+  }
+
+  .about-stepper-track-wrap {
+    right: 14px;
+  }
+}
+
+/* ============================================================
+   MOBILE STORY VIEW (<= 880px)
+   Built completely from scratch for mobile devices.
+   Natural page scroll flow. NO scroll hijacking/pinning!
+   Zero giant empty voids. Beautiful, cohesive editorial card.
+   ============================================================ */
+@media (max-width: 880px) {
+  /* Hide Desktop Sticky Story completely on Mobile */
+  .about-desktop-story {
+    display: none !important;
+  }
+
+  /* Show Mobile Section in Natural Page Flow */
+  .about-mobile-story {
+    display: block !important;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 48px 20px 44px;
+    box-sizing: border-box;
+  }
+
+  .about-mobile-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Mobile Section Header */
+  .mobile-about-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+
+  .mobile-about-eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #86868b;
+  }
+
+  .mobile-about-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 6.8vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111111;
+    margin: 0;
+    letter-spacing: -0.025em;
+  }
+
+  .mobile-about-intro {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #6e6e73;
+    margin: 0;
+  }
+
+  /* 4 Interactive Category Pills */
+  .mobile-about-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 2px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-about-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-tab-btn {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 9999px;
+    background: #f4f4f6;
+    border: 1px solid #e5e5ea;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #6e6e73;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-tab-btn.active {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Active Chapter Showcase Card */
+  .mobile-chapter-card {
+    background: #ffffff;
+    border: 1px solid #e5e5ea;
+    border-radius: 24px;
+    padding: 22px 18px 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+  }
+
+  .mobile-card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-card-tag {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #111111;
+    background: #f0f0f2;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+  }
+
+  .mobile-card-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #111111;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  .mobile-card-headline .headline-line {
+    display: block;
+  }
+
+  .mobile-card-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #6e6e73;
+    margin: 0;
+  }
+
+  /* Mobile Placeholder Frame */
+  .mobile-placeholder-frame {
+    width: 100%;
+    height: 190px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #f8f8fa;
+    border: 1px solid #e5e5ea;
+    box-sizing: border-box;
+    margin-top: 4px;
+  }
+
+  .mobile-placeholder-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(150deg, #ffffff 0%, #f4f4f7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative;
+    user-select: none;
+  }
+
+  .mobile-placeholder-inner .placeholder-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e5ea;
+  }
+
+  .mobile-placeholder-inner .placeholder-main-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #111111;
+    text-transform: uppercase;
+  }
+
+  .mobile-placeholder-inner .placeholder-sub-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #86868b;
+  }
+
+  /* Card Bottom Controls: Dots + Arrows */
+  .mobile-card-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f2;
+    margin-top: 2px;
+  }
+
+  .mobile-dots-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mobile-indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d2d2d7;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-indicator-dot.active {
+    width: 18px;
+    border-radius: 999px;
+    background: #111111;
+  }
+
+  .mobile-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mobile-nav-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f5f5f7;
+    border: 1px solid #e5e5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-arrow:active {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .mobile-nav-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
