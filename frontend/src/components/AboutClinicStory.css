@@ -151,10 +151,62 @@
   margin: 0 0 22px;
 }
 
-.headline-line {
+.chapter-headline .fold-text {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
   display: block;
 }
 
+/* Masked reveal wrapper — clips overflowing translateY */
+.headline-line-wrap {
+  display: block;
+  overflow: hidden;
+  /* tiny extra breathing room so descenders aren't clipped */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* The actual text line — starts hidden below, reveals upward */
+.headline-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ── Mobile only: CSS animation triggered via is-active on mobile-chapter-card ── */
+.mobile-chapter-card.is-active .headline-line {
+  animation: revealLineUp 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.mobile-chapter-card.is-active .headline-line-wrap:nth-child(1) .headline-line { animation-delay: 0.04s; }
+.mobile-chapter-card.is-active .headline-line-wrap:nth-child(2) .headline-line { animation-delay: 0.16s; }
+.mobile-chapter-card.is-active .headline-line-wrap:nth-child(3) .headline-line { animation-delay: 0.28s; }
+
+/* ── Eyebrow reveal wrapper ── */
+.eyebrow-line-wrap {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.eyebrow-label {
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.mobile-chapter-card.is-active .eyebrow-label {
+  animation: revealLineUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
+}
+
+/* ── Description ── */
 .chapter-description {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(14.5px, 1.15vw, 16px);
@@ -162,7 +214,38 @@
   color: #6e6e73;
   max-width: 500px;
   margin: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: transform, opacity;
 }
+
+.mobile-chapter-card.is-active .mobile-card-description {
+  animation: revealFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+}
+
+/* ── Keyframes ── */
+@keyframes revealLineUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes revealFadeUp {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 /* Right Column: Fixed Image Frame */
 .about-image-column {
@@ -179,11 +262,9 @@
   width: clamp(420px, 37vw, 520px);
   height: clamp(500px, 64vh, 620px);
   border-radius: 36px;
-  background-color: #f7f7f9;
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08),
-              0 0 0 1px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
+  --story-card-gap: 32px;
 }
 
 .story-image-card {
@@ -496,7 +577,13 @@
     letter-spacing: -0.015em;
   }
 
-  .mobile-card-headline .headline-line {
+  .mobile-card-headline .fold-text {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    color: inherit;
     display: block;
   }
 
@@ -506,6 +593,9 @@
     line-height: 1.55;
     color: #6e6e73;
     margin: 0;
+    opacity: 0;
+    transform: translateY(14px);
+    will-change: transform, opacity;
   }
 
   /* Mobile Placeholder Frame */

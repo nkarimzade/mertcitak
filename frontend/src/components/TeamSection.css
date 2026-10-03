@@ -1,30 +1,37 @@
 /* ============================================================
    TEKNİK EKİBİMİZ — Apple-Style Sticky Horizontal Team Section
+   Palette: Warm Luxury Cashmere / Taş Fildişi (#F7F5F0)
    ============================================================ */
 
 .team-scroll-container {
   position: relative;
   width: 100%;
   height: 360vh; /* Extended scroll distance for a relaxed, premium pace */
-  background-color: #ffffff;
-  color: #111111;
+  background-color: #ffffff; /* Clean white canvas behind floating card */
+  color: #1a1918;
+  padding-top: 48px; /* Distinct separation from About section */
   box-sizing: border-box;
 }
 
-/* Pinned Viewport (100vh) holding the header, stage, and indicator */
+/* Pinned Viewport — Clearly visible floating card with 72px side gaps and 48px radius */
 .team-pinned-viewport {
   position: sticky;
-  top: 0;
-  width: 100%;
-  height: 100vh;
+  top: 28px;
+  width: calc(100% - 144px);
+  height: calc(100vh - 56px);
+  margin: 0 auto;
+  border-radius: 48px;
+  background-color: #F7F5F0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 52px 0 36px;
+  padding: 48px 0 32px;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #ffffff;
   z-index: 10;
+  box-shadow: 0 28px 70px rgba(35, 28, 16, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1.5px solid rgba(215, 205, 190, 0.95);
+  will-change: width, height, top, border-radius, box-shadow;
 }
 
 /* Top Container: Editorial Headline Block & Progress Indicator */
@@ -53,19 +60,23 @@
   align-items: center;
   gap: 8px;
   font-family: 'Poppins', sans-serif;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #6e6e73;
-  margin-bottom: 12px;
+  color: #736d64;
+  background: #eae4d8;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+  width: fit-content;
 }
 
 .team-eyebrow-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #e04b40;
+  background-color: #c98a58;
   flex-shrink: 0;
 }
 
@@ -75,7 +86,7 @@
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.025em;
-  color: #111111;
+  color: #1a1918;
   margin: 0 0 14px;
 }
 
@@ -83,7 +94,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   line-height: 1.55;
-  color: #6e6e73;
+  color: #716c62;
   max-width: 520px;
   margin: 0;
 }
@@ -110,11 +121,11 @@
 }
 
 .progress-ring-bg {
-  stroke: #e5e5ea;
+  stroke: #ded6c8;
 }
 
 .progress-ring-fill {
-  stroke: #111111;
+  stroke: #1a1918;
   stroke-dasharray: 138.23;
   stroke-dashoffset: 128;
   transition: stroke-dashoffset 0.15s ease-out;
@@ -126,7 +137,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 11px;
   font-weight: 600;
-  color: #111111;
+  color: #1a1918;
   letter-spacing: 0.02em;
   user-select: none;
   pointer-events: none;
@@ -153,16 +164,17 @@
   will-change: transform;
 }
 
-/* Member Portrait Card (Apple Luxury Style) */
+/* Member Portrait Card (Apple Luxury Style) — Crisp Pure White floating on Cashmere */
 .team-card {
   position: relative;
   flex-shrink: 0;
   width: 440px;
   height: 590px;
   border-radius: 36px;
-  background-color: #f5f5f7;
+  background-color: #ffffff;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 18px 48px rgba(45, 40, 30, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(222, 215, 202, 0.85);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
@@ -175,13 +187,13 @@
   height: 100%;
   overflow: hidden;
   border-radius: 36px;
-  background-color: #f7f7f8;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 28px 28px;
   box-sizing: border-box;
-  border: 1px solid #e5e5ea;
+  border: none;
 }
 
 /* Center Placeholder Area: Görsel Eklenecek */
@@ -192,16 +204,16 @@
   justify-content: center;
   gap: 12px;
   padding: 44px 20px;
-  border: 1.5px dashed #c7c7cc;
+  border: 1.5px dashed #ded6c6;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.55);
+  background: #faf8f4;
   margin: auto 0;
   transition: all 0.25s ease;
 }
 
 .team-card:hover .team-placeholder-center {
-  background: #ffffff;
-  border-color: #8e8e93;
+  background: #f4efe4;
+  border-color: #baa991;
 }
 
 .placeholder-icon-circle {
@@ -212,26 +224,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1d1d1f;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e5ea;
+  color: #1a1918;
+  box-shadow: 0 4px 14px rgba(45, 40, 30, 0.06);
+  border: 1px solid #e5ded1;
 }
 
 .placeholder-label {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  color: #48484a;
+  color: #5c574e;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-/* Card Content: Name, Role, Specialty (Light Apple Editorial Style) */
+/* Card Content: Name, Role, Specialty (Warm Cashmere Editorial Style) */
 .team-card-content-light {
   display: flex;
   flex-direction: column;
   padding-top: 16px;
-  border-top: 1px solid #e5e5ea;
+  border-top: 1px solid #ede7db;
 }
 
 .light-pill {
@@ -240,12 +252,12 @@
   font-size: 10.5px;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: #1d1d1f;
-  background: #ffffff;
+  color: #3b3730;
+  background: #f5f1e8;
   padding: 4px 12px;
   border-radius: 9999px;
   margin-bottom: 10px;
-  border: 1px solid #d2d2d7;
+  border: 1px solid #ded5c5;
 }
 
 .light-name {
@@ -254,7 +266,7 @@
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.015em;
-  color: #111111;
+  color: #181716;
   margin: 0 0 4px;
 }
 
@@ -262,7 +274,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 13.5px;
   font-weight: 500;
-  color: #48484a;
+  color: #575249;
   margin: 0 0 6px;
 }
 
@@ -270,7 +282,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
   line-height: 1.45;
-  color: #86868b;
+  color: #8c8577;
 }
 
 /* ============================================================
@@ -296,15 +308,23 @@
 @media (max-width: 840px) {
   .team-scroll-container {
     height: auto;
-    padding: 60px 0 70px;
+    padding: 32px 0 60px;
+    background-color: #ffffff;
   }
 
   .team-pinned-viewport {
-    height: auto;
+    height: auto !important;
     min-height: unset;
     max-height: unset;
-    padding: 0;
+    width: calc(100% - 32px) !important;
+    margin: 0 auto !important;
+    top: 0 !important;
+    padding: 36px 0 32px !important;
     overflow: visible;
+    background-color: #F7F5F0;
+    border-radius: 28px !important;
+    box-shadow: 0 16px 40px rgba(45, 38, 25, 0.06) !important;
+    border: 1px solid rgba(222, 215, 202, 0.85) !important;
   }
 
   .team-top-container {

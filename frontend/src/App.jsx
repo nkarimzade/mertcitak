@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TopHeader from './components/TopHeader'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import AboutClinicStory from './components/AboutClinicStory'
 import TeamSection from './components/TeamSection'
 import StoryModal from './components/StoryModal'
+import { initScrollReveal } from './utils/scrollReveal'
 
 function App() {
   const [isStoryOpen, setIsStoryOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const cleanup = initScrollReveal()
+    return cleanup
+  }, [])
 
   return (
     <div className="app-root">

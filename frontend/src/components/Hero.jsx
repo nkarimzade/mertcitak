@@ -1,6 +1,14 @@
+import { useState } from 'react'
+import SplitText from './SplitText'
 import './Hero.css'
 
 export default function Hero({ onBookConsultation, onWatchStory }) {
+  const [headlineComplete, setHeadlineComplete] = useState(false)
+
+  const handleHeadlineComplete = () => {
+    setHeadlineComplete(true)
+  }
+
   return (
     <section className="hero-section" id="home">
       {/* Background Graphic Layer */}
@@ -24,6 +32,8 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
       {/* Left Scroll Indicator */}
       <div
         className="hero-scroll-indicator"
+        data-reveal="fade"
+        data-reveal-delay="4"
         onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
         style={{ cursor: 'pointer' }}
         title="Kliniğimizi Keşfedin"
@@ -36,21 +46,65 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
       <div className="hero-main-container">
         {/* Left Column: Headline and CTAs */}
         <div className="hero-left-column">
-          <div className="hero-tagline-eyebrow">
-            ÇANKIRI'NIN YENİ DİŞ KLİNİĞİ
-          </div>
+          <SplitText
+            tag="div"
+            className="hero-tagline-eyebrow"
+            text="ÇANKIRI'NIN YENİ DİŞ KLİNİĞİ"
+            textAlign="left"
+            delay={20}
+            duration={0.8}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 0.95, y: 0 }}
+            threshold={0.1}
+            rootMargin="-50px"
+            play={headlineComplete}
+          />
 
-          <h1 className="hero-headline">
-            Gülüşünüze<br />
-            Değer Katan<br />
-            Kusursuzluk
-          </h1>
+          <SplitText
+            tag="h1"
+            className="hero-headline"
+            text={"Gülüşünüze\nDeğer Katan\nKusursuzluk"}
+            style={{ whiteSpace: 'pre-line' }}
+            textAlign="left"
+            delay={35}
+            duration={1.15}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-50px"
+            play={true}
+            onLetterAnimationComplete={handleHeadlineComplete}
+          />
 
-          <p className="hero-description">
-            Daha sağlıklı ve özgüvenli bir gülüş için ileri dijital teknoloji, uzman hekimlik ve kişiye özel estetik yaklaşım.
-          </p>
+          <SplitText
+            tag="p"
+            className="hero-description"
+            text="Daha sağlıklı ve özgüvenli bir gülüş için ileri dijital teknoloji, uzman hekimlik ve kişiye özel estetik yaklaşım."
+            textAlign="left"
+            delay={20}
+            duration={0.9}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 0.92, y: 0 }}
+            threshold={0.1}
+            rootMargin="-50px"
+            play={headlineComplete}
+          />
 
-          <div className="hero-cta-group">
+          <div
+            className="hero-cta-group"
+            style={{
+              opacity: headlineComplete ? 1 : 0,
+              transform: headlineComplete ? 'translateY(0)' : 'translateY(16px)',
+              transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s',
+              pointerEvents: headlineComplete ? 'auto' : 'none'
+            }}
+          >
             <button
               type="button"
               className="btn-watch-story"
@@ -73,7 +127,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
       </div>
 
       {/* Bottom Information Strip (Slider removed) */}
-      <div className="hero-bottom-strip">
+      <div className="hero-bottom-strip" data-reveal data-reveal-delay="5">
         <div className="bottom-metrics">
           <span>Modern Diş Hekimliği</span>
           <span className="separator">/</span>

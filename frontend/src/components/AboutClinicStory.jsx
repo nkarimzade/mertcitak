@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { FiImage, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import FoldText from './FoldText'
 import './AboutClinicStory.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export const clinicStoryChapters = [
   {
@@ -43,6 +48,7 @@ export default function AboutClinicStory() {
   const textItemsRef = useRef([])
   const imageItemsRef = useRef([])
   const progressLineRef = useRef(null)
+  const foldRefs = useRef([])
 
   // Mobile State
   const [mobileIndex, setMobileIndex] = useState(0)
@@ -59,6 +65,94 @@ export default function AboutClinicStory() {
     let animId
     let currentV = 0
     let targetV = 0
+
+    // Easing helpers for scroll-driven reveals
+    const clamp01 = (v) => Math.min(1, Math.max(0, v))
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3)
+    const rp = (t, start, dur) => easeOut(clamp01((t - start) / dur))
+
+    // Pre-cache inner metadata elements per card
+    const cardEls = textItemsRef.current.map((textEl) => {
+      if (!textEl) return null
+      return {
+        eyebrow: textEl.querySelector('.eyebrow-label'),
+        desc: textEl.querySelector('.chapter-description'),
+      }
+    })
+
+    const setMetaInitial = (els) => {
+      if (!els) return
+      if (els.eyebrow) { els.eyebrow.style.transform = 'translateY(100%)'; els.eyebrow.style.opacity = '0' }
+      if (els.desc) { els.desc.style.transform = 'translateY(14px)'; els.desc.style.opacity = '0' }
+    }
+
+    const setMetaFinal = (els) => {
+      if (!els) return
+      if (els.eyebrow) { els.eyebrow.style.transform = 'translateY(0%)'; els.eyebrow.style.opacity = '1' }
+      if (els.desc) { els.desc.style.transform = 'translateY(0)'; els.desc.style.opacity = '1' }
+    }
+
+    const setMetaEntering = (els, t) => {
+      if (!els) return
+      if (els.eyebrow) {
+        const p = rp(t, 0, 0.45)
+        els.eyebrow.style.transform = `translateY(${(1 - p) * 100}%)`
+        els.eyebrow.style.opacity = `${p}`
+      }
+      if (els.desc) {
+        const p = rp(t, 0.25, 0.5)
+        els.desc.style.transform = `translateY(${(1 - p) * 14}px)`
+        els.desc.style.opacity = `${p}`
+      }
+    }
+
+    const revealedSet = new Set()
+
+    const triggerCardFold = (idx) => {
+      if (revealedSet.has(idx)) return
+      revealedSet.add(idx)
+      foldRefs.current[idx]?.play()
+      if (cardEls[idx]?.eyebrow) {
+        cardEls[idx].eyebrow.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease'
+        cardEls[idx].eyebrow.style.transform = 'translateY(0)'
+        cardEls[idx].eyebrow.style.opacity = '1'
+      }
+      if (cardEls[idx]?.desc) {
+        cardEls[idx].desc.style.transition = 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, opacity 0.7s ease 0.15s'
+        cardEls[idx].desc.style.transform = 'translateY(0)'
+        cardEls[idx].desc.style.opacity = '1'
+      }
+    }
+
+    const resetCardFold = (idx) => {
+      if (!revealedSet.has(idx)) return
+      revealedSet.delete(idx)
+      foldRefs.current[idx]?.reset()
+      if (cardEls[idx]?.eyebrow) {
+        cardEls[idx].eyebrow.style.transition = 'none'
+        cardEls[idx].eyebrow.style.transform = 'translateY(100%)'
+        cardEls[idx].eyebrow.style.opacity = '0'
+      }
+      if (cardEls[idx]?.desc) {
+        cardEls[idx].desc.style.transition = 'none'
+        cardEls[idx].desc.style.transform = 'translateY(14px)'
+        cardEls[idx].desc.style.opacity = '0'
+      }
+    }
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: container,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        triggerCardFold(0)
+      },
+    })
+
+    const initialRect = container.getBoundingClientRect()
+    if (initialRect.top < window.innerHeight * 0.75) {
+      triggerCardFold(0)
+    }
 
     const computeTargetV = (P) => {
       if (P <= 0.12) return 0
@@ -107,58 +201,84 @@ export default function AboutClinicStory() {
       const t = Math.min(Math.max(currentV - k, 0), 1)
 
       const numItems = clinicStoryChapters.length
+      const CARD_GAP = 32
+      const TEXT_GAP = 28
+
+      // Trigger fold reveals based on current scroll position
+      for (let i = 0; i < numItems; i++) {
+        if (i === 0) {
+          if (currentV >= 0 && container.getBoundingClientRect().top < window.innerHeight) {
+            triggerCardFold(0)
+          }
+        } else {
+          if (currentV >= i - 0.25) {
+            triggerCardFold(i)
+          } else if (currentV < i - 0.55) {
+            resetCardFold(i)
+          }
+        }
+      }
 
       for (let i = 0; i < numItems; i++) {
         const textEl = textItemsRef.current[i]
         const imgEl = imageItemsRef.current[i]
+        const els = cardEls[i]
 
         if (!textEl || !imgEl) continue
 
         if (i < k) {
-          textEl.style.transform = 'translate3d(0, -100%, 0)'
+          // Fully gone — reset inner elements, hide card
+          textEl.style.transform = `translate3d(0, calc(-100% - ${TEXT_GAP}px), 0)`
           textEl.style.opacity = '0'
           textEl.style.visibility = 'hidden'
           textEl.style.pointerEvents = 'none'
+          setMetaInitial(els)
 
-          imgEl.style.transform = 'translate3d(0, -100%, 0)'
+          imgEl.style.transform = `translate3d(0, calc(-100% - ${CARD_GAP}px), 0)`
           imgEl.style.opacity = '0'
           imgEl.style.visibility = 'hidden'
           imgEl.style.zIndex = '1'
         } else if (i === k) {
-          const textY = -t * 100
+          // Active / exiting — keep lines fully revealed, slide the parent card away
+          const textY = `calc(-${t * 100}% - ${t * TEXT_GAP}px)`
           const textOpacity = Math.max(0, 1 - t * 1.1)
 
-          textEl.style.transform = `translate3d(0, ${textY}%, 0)`
+          textEl.style.transform = `translate3d(0, ${textY}, 0)`
           textEl.style.opacity = `${textOpacity}`
           textEl.style.visibility = 'visible'
           textEl.style.pointerEvents = t > 0.5 ? 'none' : 'auto'
+          setMetaFinal(els)
 
-          const imgY = -t * 100
-          imgEl.style.transform = `translate3d(0, ${imgY}%, 0)`
+          const imgY = `calc(-${t * 100}% - ${t * CARD_GAP}px)`
+          imgEl.style.transform = `translate3d(0, ${imgY}, 0)`
           imgEl.style.opacity = '1'
           imgEl.style.visibility = 'visible'
           imgEl.style.zIndex = '2'
         } else if (i === k + 1) {
-          const textY = (1 - t) * 100
+          // Entering — scroll-driven line reveal synced with image
+          const textY = `calc(${(1 - t) * 100}% + ${(1 - t) * TEXT_GAP}px)`
           const textOpacity = Math.min(1, t * 1.2)
 
-          textEl.style.transform = `translate3d(0, ${textY}%, 0)`
+          textEl.style.transform = `translate3d(0, ${textY}, 0)`
           textEl.style.opacity = `${textOpacity}`
           textEl.style.visibility = 'visible'
           textEl.style.pointerEvents = t > 0.5 ? 'auto' : 'none'
+          setMetaEntering(els, t)
 
-          const imgY = (1 - t) * 100
-          imgEl.style.transform = `translate3d(0, ${imgY}%, 0)`
+          const imgY = `calc(${(1 - t) * 100}% + ${(1 - t) * CARD_GAP}px)`
+          imgEl.style.transform = `translate3d(0, ${imgY}, 0)`
           imgEl.style.opacity = '1'
           imgEl.style.visibility = 'visible'
           imgEl.style.zIndex = '3'
         } else {
-          textEl.style.transform = 'translate3d(0, 100%, 0)'
+          // Not yet entered — hidden with lines at initial state
+          textEl.style.transform = `translate3d(0, calc(100% + ${TEXT_GAP}px), 0)`
           textEl.style.opacity = '0'
           textEl.style.visibility = 'hidden'
           textEl.style.pointerEvents = 'none'
+          setMetaInitial(els)
 
-          imgEl.style.transform = 'translate3d(0, 100%, 0)'
+          imgEl.style.transform = `translate3d(0, calc(100% + ${CARD_GAP}px), 0)`
           imgEl.style.opacity = '0'
           imgEl.style.visibility = 'hidden'
           imgEl.style.zIndex = '1'
@@ -177,6 +297,7 @@ export default function AboutClinicStory() {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
       cancelAnimationFrame(animId)
+      scrollTrigger?.kill()
     }
   }, [])
 
@@ -216,7 +337,7 @@ export default function AboutClinicStory() {
       <section className="about-desktop-story" ref={containerRef}>
         <div className="about-sticky-viewport">
           {/* Top Minimal Navigation Bar */}
-          <div className="about-topbar">
+          <div className="about-topbar" data-reveal>
             <div className="about-topbar-brand">
               <span className="about-topbar-name">MERT ÇITAK CLINIC</span>
             </div>
@@ -237,20 +358,29 @@ export default function AboutClinicStory() {
                     className="story-text-card"
                     ref={(el) => (textItemsRef.current[idx] = el)}
                     style={{
-                      transform: idx === 0 ? 'translate3d(0, 0%, 0)' : 'translate3d(0, 100%, 0)',
+                      transform: idx === 0 ? 'translate3d(0, 0%, 0)' : 'translate3d(0, calc(100% + 28px), 0)',
                       opacity: idx === 0 ? 1 : 0,
                     }}
+                    data-index={idx}
                   >
                     <div className="chapter-eyebrow">
-                      <span className="eyebrow-label">{chapter.label}</span>
+                      <span className="eyebrow-line-wrap">
+                        <span className="eyebrow-label">{chapter.label}</span>
+                      </span>
                     </div>
 
                     <h2 className="chapter-headline">
-                      {chapter.headline.split('\n').map((line, lIdx) => (
-                        <span key={lIdx} className="headline-line">
-                          {line}
-                        </span>
-                      ))}
+                      <FoldText
+                        ref={(el) => (foldRefs.current[idx] = el)}
+                        text={chapter.headline}
+                        splitBy="word"
+                        hinge="top"
+                        trigger="manual"
+                        duration={0.65}
+                        stagger={0.045}
+                        creaseShading={0.55}
+                        perspective={700}
+                      />
                     </h2>
 
                     <p className="chapter-description">{chapter.description}</p>
@@ -269,7 +399,7 @@ export default function AboutClinicStory() {
                     ref={(el) => (imageItemsRef.current[idx] = el)}
                     style={{
                       opacity: idx === 0 ? 1 : 0,
-                      transform: idx === 0 ? 'translate3d(0, 0%, 0)' : 'translate3d(0, 100%, 0)',
+                      transform: idx === 0 ? 'translate3d(0, 0%, 0)' : 'translate3d(0, calc(100% + 32px), 0)',
                     }}
                   >
                     {/* Luxury Editorial Placeholder Box */}
@@ -295,7 +425,7 @@ export default function AboutClinicStory() {
           </div>
 
           {/* Minimal Right-Side Vertical Stepper Line for Desktop */}
-          <div className="about-stepper-track-wrap" aria-label="Hikaye İlerlemesi">
+          <div className="about-stepper-track-wrap" data-reveal data-reveal-delay="2" aria-label="Hikaye İlerlemesi">
             <div className="stepper-track-line">
               <div className="stepper-track-fill" ref={progressLineRef} />
             </div>
@@ -313,18 +443,18 @@ export default function AboutClinicStory() {
         <div className="about-mobile-inner">
           {/* Header Block */}
           <div className="mobile-about-header">
-            <span className="mobile-about-eyebrow">HAKKIMIZDA</span>
-            <h2 className="mobile-about-title">
+            <span className="mobile-about-eyebrow" data-reveal>HAKKIMIZDA</span>
+            <h2 className="mobile-about-title" data-reveal data-reveal-delay="1">
               Modern Diş Hekimliği,<br />
               Kişisel Yaklaşım.
             </h2>
-            <p className="mobile-about-intro">
+            <p className="mobile-about-intro" data-reveal data-reveal-delay="2">
               Her hastanın ihtiyacı farklı. Kliniğimizde ileri teknoloji ve hekimlik zanaatını birleştiriyoruz.
             </p>
           </div>
 
           {/* 4 Interactive Category Pills */}
-          <div className="mobile-about-tabs" role="tablist">
+          <div className="mobile-about-tabs" role="tablist" data-reveal data-reveal-delay="3">
             {clinicStoryChapters.map((chapter, idx) => (
               <button
                 key={chapter.id}
@@ -339,9 +469,12 @@ export default function AboutClinicStory() {
             ))}
           </div>
 
-          {/* Single Unified Active Story Card */}
+          {/* Single Unified Active Story Card — key forces re-mount (re-triggers animation) on tab change */}
           <div
-            className="mobile-chapter-card"
+            key={mobileIndex}
+            className="mobile-chapter-card is-active"
+            data-reveal="scale"
+            data-reveal-delay="4"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -352,11 +485,16 @@ export default function AboutClinicStory() {
 
             {/* Headline */}
             <h3 className="mobile-card-headline">
-              {activeMobileChapter.headline.split('\n').map((line, lIdx) => (
-                <span key={lIdx} className="headline-line">
-                  {line}
-                </span>
-              ))}
+              <FoldText
+                text={activeMobileChapter.headline}
+                splitBy="word"
+                hinge="top"
+                trigger="mount"
+                duration={0.65}
+                stagger={0.045}
+                creaseShading={0.55}
+                perspective={700}
+              />
             </h3>
 
             {/* Description */}

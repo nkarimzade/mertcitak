@@ -43,6 +43,7 @@ const teamMembers = [
 
 export default function TeamSection() {
   const containerRef = useRef(null)
+  const viewportRef = useRef(null)
   const trackRef = useRef(null)
   const progressCircleRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -55,11 +56,23 @@ export default function TeamSection() {
     let animId
     let currentX = 0
     let targetX = 0
+    let currentExpandP = 0
+    let targetExpandP = 0
 
     const isMobileView = () => window.innerWidth <= 840
 
     const handleScroll = () => {
       if (isMobileView()) {
+        const viewport = viewportRef.current
+        if (viewport) {
+          viewport.style.width = ''
+          viewport.style.top = ''
+          viewport.style.height = ''
+          viewport.style.borderRadius = ''
+          viewport.style.boxShadow = ''
+          viewport.style.border = ''
+        }
+
         // Mobile progress tracked via scrollLeft of track
         const maxScrollLeft = track.scrollWidth - track.clientWidth
         if (maxScrollLeft > 0) {
@@ -83,12 +96,28 @@ export default function TeamSection() {
       const scrollableDistance = container.offsetHeight - window.innerHeight
       if (scrollableDistance <= 0) return
 
-      // Progress: 0 when container top reaches top of viewport, 1 when end of scroll is reached
+      // Expansion calculation:
+      // When approaching from below: stays clearly as a floating card with 72px side gaps and 48px radius
+      // When scroll reaches exactly here (rect.top <= 140px down into pinned state):
+      // it expands smoothly from floating card to full bleed right before your eyes!
+      let rawExpand = 0
+      if (rect.top > 140) {
+        rawExpand = 0
+      } else if (rect.top > 0) {
+        rawExpand = ((140 - rect.top) / 140) * 0.45
+      } else {
+        const pinProgress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
+        rawExpand = 0.45 + Math.min(pinProgress / 0.08, 1) * 0.55
+      }
+      targetExpandP = Math.min(Math.max(rawExpand, 0), 1)
+
+      // Progress for team member cards: starts once expansion reaches full size
       const progress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
+      const cardProgress = Math.min(Math.max((progress - 0.08) / 0.92, 0), 1)
 
       // Total horizontal shift to smoothly reveal card 01 through card 04
       const maxShift = Math.max(0, track.scrollWidth - window.innerWidth + 140)
-      targetX = -progress * maxShift
+      targetX = -cardProgress * maxShift
 
       // Active index for indicator and numerals
       const currentIdx = Math.min(
@@ -107,6 +136,24 @@ export default function TeamSection() {
 
     const renderLoop = () => {
       if (!isMobileView()) {
+        // Expand viewport smoothly into full-bleed on scroll
+        currentExpandP += (targetExpandP - currentExpandP) * 0.09
+        const viewport = viewportRef.current
+        if (viewport) {
+          const sideGap = (1 - currentExpandP) * 72 // 72px on each side (total 144px visible white frame)
+          const vertGap = (1 - currentExpandP) * 28 // 28px top/bottom
+          const radius = (1 - currentExpandP) * 48  // 48px corner radius
+          const shadow = (1 - currentExpandP) * 0.12
+          const borderAlpha = (1 - currentExpandP) * 0.95
+
+          viewport.style.width = `calc(100% - ${sideGap * 2}px)`
+          viewport.style.top = `${vertGap}px`
+          viewport.style.height = `calc(100vh - ${vertGap * 2}px)`
+          viewport.style.borderRadius = `${radius}px`
+          viewport.style.boxShadow = currentExpandP > 0.99 ? 'none' : `0 28px 70px rgba(35, 28, 16, ${shadow}), 0 2px 6px rgba(0, 0, 0, 0.04)`
+          viewport.style.border = currentExpandP > 0.99 ? 'none' : `1.5px solid rgba(215, 205, 190, ${borderAlpha})`
+        }
+
         // Calmer, smooth weighted inertia (Apple 60fps feel)
         currentX += (targetX - currentX) * 0.075
         track.style.transform = `translate3d(${currentX}px, 0, 0)`
@@ -149,26 +196,26 @@ export default function TeamSection() {
 
   return (
     <section className="team-scroll-container" ref={containerRef} id="team">
-      <div className="team-pinned-viewport">
+      <div className="team-pinned-viewport" ref={viewportRef}>
         {/* Top Header Row: Heading, Subtext & Circular Progress */}
         <div className="team-top-container">
           <div className="team-heading-block">
-            <div className="team-eyebrow">
+            <div className="team-eyebrow" data-reveal data-reveal-delay="1">
               <span>TEKNİK EKİBİMİZ</span>
             </div>
 
-            <h2 className="team-headline">
+            <h2 className="team-headline" data-reveal data-reveal-delay="2">
               Alanında uzman,<br />
               güvenilir bir ekip.
             </h2>
 
-            <p className="team-subtext">
+            <p className="team-subtext" data-reveal data-reveal-delay="3">
               Her tedavinin arkasında deneyim, teknoloji ve birlikte çalışan uzman bir ekip var.
             </p>
           </div>
 
           {/* Minimalist Circular Progress Indicator with 'Ekip' text */}
-          <div className="team-progress-circle-wrap" aria-label="Ekip Galerisi İlerlemesi">
+          <div className="team-progress-circle-wrap" data-reveal="scale" data-reveal-delay="3" aria-label="Ekip Galerisi İlerlemesi">
             <svg className="team-progress-ring" width="52" height="52" viewBox="0 0 52 52">
               <circle
                 className="progress-ring-bg"
@@ -198,7 +245,7 @@ export default function TeamSection() {
         </div>
 
         {/* Horizontal Team Track */}
-        <div className="team-stage-wrapper">
+        <div className="team-stage-wrapper" data-reveal data-reveal-delay="4">
           <div className="team-track" ref={trackRef}>
             {teamMembers.map((member, index) => {
               const isActive = index === activeIndex
