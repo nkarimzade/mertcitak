@@ -1,224 +1,169 @@
-.modal-overlay {
+.simple-modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(20, 18, 16, 0.55);
+  background-color: rgba(15, 15, 18, 0.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-  animation: fadeIn 0.25s ease;
+  z-index: 10000;
+  padding: 16px;
+  animation: modalFadeIn 0.2s ease;
 }
 
-.modal-card {
+.simple-modal-box {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  background-color: #faf8f5;
-  border: 1px solid rgba(23, 21, 19, 0.1);
+  max-width: 460px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 26px 24px 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+  animation: modalSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
 }
 
-.modal-close {
+.simple-modal-close {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 16px;
+  right: 16px;
   background: transparent;
   border: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: #6d6760;
-  padding: 6px;
-  transition: color 0.2s ease;
-}
-
-.modal-close:hover {
-  color: #171513;
-}
-
-.modal-badge {
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  color: #a47e58;
-}
-
-.modal-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 32px;
-  font-weight: 500;
-  color: #171513;
-  margin: 6px 0 8px;
-}
-
-.modal-subtitle {
-  font-family: 'Poppins', sans-serif;
-  font-size: 13.5px;
-  color: #635e57;
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.booking-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-
-.form-row {
-  display: flex;
-  gap: 14px;
-}
-
-.form-group label {
-  font-family: 'Poppins', sans-serif;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: #4a453f;
-  text-transform: uppercase;
-}
-
-.form-group input,
-.form-group select {
-  font-family: 'Poppins', sans-serif;
-  font-size: 13.5px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(23, 21, 19, 0.18);
-  background-color: #ffffff;
-  color: #171513;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #171513;
-  box-shadow: 0 0 0 3px rgba(23, 21, 19, 0.08);
-}
-
-.modal-submit-btn {
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-  padding: 14px 24px;
-  background-color: #171513;
-  color: #ffffff;
-  border: none;
-  border-radius: 9999px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 13.5px;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.25s ease;
+  color: #888888;
+  border-radius: 50%;
+  transition: all 0.18s ease;
 }
 
-.modal-submit-btn:hover {
-  background-color: #2e2a26;
+.simple-modal-close:hover {
+  background: #f2f2f5;
+  color: #111111;
+}
+
+/* Header */
+.simple-modal-head {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.simple-modal-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.simple-modal-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #888888;
+  margin-top: 3px;
+}
+
+/* Side-by-side Action Buttons */
+.simple-modal-links.side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.simple-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f7f7fa;
+  text-decoration: none;
+  color: #111111;
+  transition: all 0.18s ease;
+  box-sizing: border-box;
+}
+
+.simple-modal-item:hover {
+  background: #eeeeee;
   transform: translateY(-1px);
 }
 
-.modal-address-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  padding: 10px 14px;
-  background-color: rgba(23, 21, 19, 0.04);
-  border: 1px solid rgba(23, 21, 19, 0.08);
+.simple-item-icon-wrap {
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 11.5px;
-  color: #55504a;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.modal-address-badge:hover {
-  background-color: rgba(23, 21, 19, 0.08);
-  color: #171513;
-  border-color: rgba(23, 21, 19, 0.16);
-}
-
-.modal-address-badge svg {
-  flex-shrink: 0;
-  color: #a47e58;
-}
-
-.modal-success {
-  text-align: center;
-  padding: 30px 10px;
-}
-
-.success-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #171513;
-  color: #ffffff;
-  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  flex-shrink: 0;
 }
 
-.modal-success h3 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 28px;
-  color: #171513;
-  margin-bottom: 8px;
+.simple-item-icon-wrap.wa-wrap {
+  background: #eafaf1;
+  color: #25d366;
 }
 
-.modal-success p {
+.simple-item-icon-wrap.phone-wrap {
+  background: #ebebed;
+  color: #111111;
+}
+
+.simple-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.simple-item-label {
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  color: #635e57;
-  line-height: 1.5;
+  font-size: 10.5px;
+  color: #777777;
+  font-weight: 500;
 }
 
-@keyframes fadeIn {
+.simple-item-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111;
+  white-space: nowrap;
+}
+
+/* Footer */
+.simple-modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #f0f0f4;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  color: #888888;
+}
+
+@keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@media (max-width: 520px) {
-  .modal-overlay {
-    padding: 10px;
-    align-items: flex-end;
-  }
-  .modal-card {
-    padding: 24px 18px;
-    max-height: 88vh;
-    overflow-y: auto;
-    border-radius: 20px 20px 0 0;
-  }
-  .modal-title {
-    font-size: 25px;
-  }
-  .form-row {
-    flex-direction: column;
-    gap: 12px;
+@media (max-width: 440px) {
+  .simple-modal-links.side-by-side {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 }

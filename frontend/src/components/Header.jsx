@@ -1,16 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Sling as Hamburger } from 'hamburger-react'
-import {
-  FiHome,
-  FiInfo,
-  FiUsers,
-  FiSmile,
-  FiPhoneCall,
-  FiChevronRight,
-  FiX
-} from 'react-icons/fi'
-import { FaTooth, FaWhatsapp } from 'react-icons/fa6'
-import { RiHospitalLine } from 'react-icons/ri'
 import './Header.css'
 
 export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: controlledSetMenuOpen, onContactClick }) {
@@ -20,31 +9,47 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
   const setMenuOpen = isMenuControlled ? controlledSetMenuOpen : setInternalMenuOpen
 
   const [activeNav, setActiveNav] = useState('Ana Sayfa')
+  const menuRef = useRef(null)
 
-  // Close drawer on Escape key
+  // Close menu on click outside or Escape key
   useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false)
+      }
+    }
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && menuOpen) {
         setMenuOpen(false)
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      window.addEventListener('keydown', handleKeyDown)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [menuOpen, setMenuOpen])
 
   const navItems = [
-    { label: 'Ana Sayfa', href: '#home', icon: FiHome },
-    { label: 'Hakkımızda', href: '#about', icon: FiInfo },
-    { label: 'Tedaviler', href: '#treatments', icon: FaTooth },
-    { label: 'Ekibimiz', href: '#team', icon: FiUsers },
-    { label: 'Kliniğimiz', href: '#clinic', icon: RiHospitalLine },
-    { label: 'Hasta Hikayeleri', href: '#stories', icon: FiSmile },
-    { label: 'İletişim', href: '#contact', icon: FiPhoneCall },
+    { label: 'Ana Sayfa', href: '#home' },
+    { label: 'Hakkımızda', href: '#about' },
+    { label: 'Tedaviler', href: '#treatments' },
+    { label: 'Ekibimiz', href: '#team' },
+    { label: 'Kliniğimiz', href: '#clinic-video' },
+    { label: 'Galeri', href: '#gallery' },
+    { label: 'İletişim', href: '#contact' },
   ]
 
   const handleNavClick = (label, href) => {
     setActiveNav(label)
     setMenuOpen(false)
+    if (href === '#contact' && onContactClick) {
+      onContactClick()
+      return
+    }
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
@@ -52,171 +57,95 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
   }
 
   const handleContactBtnClick = () => {
+    setMenuOpen(false)
     if (onContactClick) {
       onContactClick()
-    } else {
-      setMenuOpen(true)
     }
   }
 
   return (
-    <>
-      <header className="site-header">
-        {/* Brand Logo */}
+    <header className="site-header">
+      {/* Left: Minimalist Menu Trigger & Compact Floating Dropdown */}
+      <div className="header-left" ref={menuRef}>
+        <button
+          type="button"
+          className="header-nav-btn menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Menüyü Kapat' : 'Menüyü Aç'}
+          aria-expanded={menuOpen}
+        >
+          <div className="react-hamburger-box">
+            <Hamburger
+              toggled={menuOpen}
+              size={18}
+              color="#ffffff"
+              duration={0.3}
+              rounded
+            />
+          </div>
+          <span className="nav-btn-text">MENÜ</span>
+        </button>
+
+        {/* Compact Floating White Dropdown Menu (Screen Not Covered) */}
+        <div className={`compact-menu-dropdown ${menuOpen ? 'is-open' : ''}`}>
+          <nav className="compact-nav-list">
+            {navItems.map((item, index) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`compact-nav-link ${activeNav === item.label ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNavClick(item.label, item.href)
+                }}
+              >
+                <span className="compact-link-num">0{index + 1}</span>
+                <span className="compact-link-label">{item.label}</span>
+              </a>
+            ))}
+          </nav>
+
+          <div className="compact-menu-footer">
+            <a href="tel:+905452011918" className="compact-phone-link">
+              0545 201 19 18
+            </a>
+            <span className="compact-meta-dot">•</span>
+            <span className="compact-loc-text">İkizler İş Merkezi, Çankırı</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Center: Brand Logo */}
+      <div className="header-center">
         <a href="#home" className="header-logo">
           <span className="logo-name">MERT ÇITAK</span>
           <span className="logo-tagline">DİŞ KLİNİĞİ</span>
         </a>
+      </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="header-nav" aria-label="Ana Navigasyon">
-          <ul className="nav-list">
-            {navItems.map((item) => (
-              <li key={item.label} className="nav-item">
-                <a
-                  href={item.href}
-                  className={`nav-link ${activeNav === item.label ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.label, item.href)
-                  }}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Header Actions */}
-        <div className="header-actions">
-          <button
-            type="button"
-            className="btn-book"
-            onClick={handleContactBtnClick}
+      {/* Right: Contact Trigger */}
+      <div className="header-right">
+        <button
+          type="button"
+          className="header-nav-btn contact-btn"
+          onClick={handleContactBtnClick}
+          aria-label="İletişim"
+        >
+          <span className="nav-btn-text">İLETİŞİM</span>
+          <svg
+            className="contact-envelope-icon"
+            width="18"
+            height="14"
+            viewBox="0 0 18 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
-            <span>Bize Ulaşın</span>
-            <svg
-              className="arrow-icon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
-
-          {/* Hamburger Menu Toggle (Desktop & Mobile) */}
-          <div
-            className="hamburger-wrapper"
-            title="Klinik Bilgileri & Menü"
-            aria-label="Menü"
-          >
-            <Hamburger
-              toggled={menuOpen}
-              toggle={setMenuOpen}
-              size={22}
-              color="#ffffff"
-              duration={0.35}
-              rounded
-            />
-          </div>
-        </div>
-      </header>
-
-      {/* Backdrop Overlay */}
-      <div
-        className={`bottom-sheet-backdrop ${menuOpen ? 'active' : ''}`}
-        onClick={() => setMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Slide-Up Bottom Sheet Drawer */}
-      <section
-        className={`bottom-sheet-drawer clean-drawer ${menuOpen ? 'active' : ''}`}
-        aria-label="Klinik Bilgi ve Navigasyon Menüsü"
-        aria-modal="true"
-        role="dialog"
-      >
-        <div className="bottom-sheet-inner">
-          {/* Header */}
-          <div className="bottom-sheet-header">
-            <div className="bottom-sheet-drag-handle" />
-            <div className="bottom-sheet-header-row">
-              <div className="bottom-sheet-brand">
-                <span className="logo-name" style={{ color: '#111111' }}>MERT ÇITAK</span>
-                <span className="logo-tagline" style={{ color: '#666666' }}>DİŞ KLİNİĞİ</span>
-              </div>
-              <button
-                type="button"
-                className="bottom-sheet-close-btn"
-                onClick={() => setMenuOpen(false)}
-                aria-label="Menüyü Kapat"
-              >
-                <FiX size={20} />
-              </button>
-            </div>
-          </div>
-
-          {/* Clean Navigation Links */}
-          <div className="clean-menu-body">
-            <nav className="sheet-nav-vertical">
-              {navItems.map((item) => {
-                const IconComponent = item.icon
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={`sheet-menu-link ${activeNav === item.label ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavClick(item.label, item.href)
-                    }}
-                  >
-                    <div className="menu-link-left">
-                      {IconComponent && <IconComponent className="sheet-menu-icon" size={17} />}
-                      <span className="sheet-menu-label">{item.label}</span>
-                    </div>
-                    <FiChevronRight className="menu-link-arrow" size={16} />
-                  </a>
-                )
-              })}
-            </nav>
-
-            {/* Bottom Quick Contact Bar */}
-            <div className="sheet-bottom-actions">
-              <a href="tel:+905452011918" className="sheet-action-btn call-action">
-                <FiPhoneCall size={16} />
-                <span>0545 201 19 18</span>
-              </a>
-              <a
-                href="https://wa.me/905452011918?text=Merhaba,%20klini%C4%9Finiz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sheet-action-btn wa-action"
-              >
-                <FaWhatsapp size={17} />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-
-            {/* Discreet Location & Working Hours line */}
-            <div className="sheet-clinic-meta">
-              <span>İkizler İş Merkezi No:32/6, Çankırı</span>
-              <span className="sheet-meta-dot">•</span>
-              <span>Pzt - Cmt: 09:00 - 19:00</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+            <rect x="0.75" y="0.75" width="16.5" height="12.5" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+            <path d="M1.5 2L9 8L16.5 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </header>
   )
 }
-
-
