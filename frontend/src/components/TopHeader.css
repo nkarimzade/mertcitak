@@ -152,6 +152,7 @@
   .top-header-inner {
     padding: 0 20px;
   }
+
   .top-header-item:nth-child(3),
   .top-divider:nth-child(4) {
     display: none;
@@ -165,14 +166,17 @@
     max-height: 32px !important;
     overflow: hidden !important;
   }
+
   .top-header-inner {
     height: 32px !important;
     padding: 0 14px !important;
     justify-content: center !important;
   }
+
   .top-header-right {
     display: none !important;
   }
+
   .top-header-left {
     display: flex !important;
     align-items: center !important;
@@ -181,11 +185,13 @@
     max-width: 100% !important;
     overflow: hidden !important;
   }
+
   .top-apple-badge {
     font-size: 8.5px !important;
     padding: 2px 6px !important;
     flex-shrink: 0 !important;
   }
+
   .top-header-text {
     font-size: 10.5px !important;
     white-space: nowrap !important;
@@ -193,6 +199,7 @@
     text-overflow: ellipsis !important;
     max-width: 185px !important;
   }
+
   .top-header-link {
     font-size: 10.5px !important;
     flex-shrink: 0 !important;

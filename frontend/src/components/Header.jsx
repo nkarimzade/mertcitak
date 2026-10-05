@@ -36,7 +36,6 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
   const navItems = [
     { label: 'Ana Sayfa', href: '#home' },
     { label: 'Hakkımızda', href: '#about' },
-    { label: 'Tedaviler', href: '#treatments' },
     { label: 'Ekibimiz', href: '#team' },
     { label: 'Kliniğimiz', href: '#clinic-video' },
     { label: 'Galeri', href: '#gallery' },
@@ -78,7 +77,7 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
             <Hamburger
               toggled={menuOpen}
               size={18}
-              color="#ffffff"
+              color="#111827"
               duration={0.3}
               rounded
             />
@@ -89,7 +88,7 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
         {/* Compact Floating White Dropdown Menu (Screen Not Covered) */}
         <div className={`compact-menu-dropdown ${menuOpen ? 'is-open' : ''}`}>
           <nav className="compact-nav-list">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -99,7 +98,6 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
                   handleNavClick(item.label, item.href)
                 }}
               >
-                <span className="compact-link-num">0{index + 1}</span>
                 <span className="compact-link-label">{item.label}</span>
               </a>
             ))}

@@ -2,32 +2,32 @@ import DriftWall from './DriftWall'
 import './GallerySection.css'
 
 const items = [
-  { image: '/gallery/lounge.jpg', title: 'VIP Karşılama & Lounge' },
-  { image: '/gallery/treatment.jpg', title: 'Modern Tedavi Odası' },
-  { image: '/gallery/scanner.jpg', title: '3D Dijital Tarama' },
+  { image: '/gallery/lounge.jpg', title: 'Ferah Karşılama Alanı' },
+  { image: '/gallery/treatment.jpg', title: 'Modern Tedavi Ünitesi' },
+  { image: '/gallery/scanner.jpg', title: '3D Ağız İçi Tarama' },
   { image: '/gallery/smile.jpg', title: 'Estetik Gülüş Tasarımı' },
-  { image: '/gallery/consultation.jpg', title: 'Konsültasyon Odası' },
-  { image: '/gallery/details.jpg', title: 'Sterilizasyon & Teknoloji' },
-  { image: '/gallery/treatment.jpg', title: 'İmplantoloji & Cerrahi' },
-  { image: '/gallery/lounge.jpg', title: 'Özel Bekleme Alanı' },
-  { image: '/gallery/smile.jpg', title: 'Gülüş Tasarım Stüdyosu' },
-  { image: '/gallery/scanner.jpg', title: 'Dijital Teşhis Laboratuvarı' },
+  { image: '/gallery/consultation.jpg', title: 'Birebir Konsültasyon' },
+  { image: '/gallery/details.jpg', title: 'Gelişmiş Sterilizasyon' },
+  { image: '/gallery/treatment.jpg', title: 'İmplant ve Cerrahi Odası' },
+  { image: '/gallery/lounge.jpg', title: 'Huzurlu Bekleme Alanı' },
+  { image: '/gallery/smile.jpg', title: 'Gülüş Analiz Stüdyosu' },
+  { image: '/gallery/scanner.jpg', title: 'Dijital Teşhis Ünitesi' },
   { image: '/gallery/consultation.jpg', title: 'Hasta Dinlenme Alanı' },
-  { image: '/gallery/details.jpg', title: 'Premium Ekipmanlar' },
-  { image: '/gallery/lounge.jpg', title: 'Klinik Mimarisi' },
+  { image: '/gallery/details.jpg', title: 'Yüksek Standartlı Ekipman' },
+  { image: '/gallery/lounge.jpg', title: 'Aydınlık Klinik Mimarisi' },
   { image: '/gallery/treatment.jpg', title: 'Konforlu Tedavi Koltuğu' },
-  { image: '/gallery/scanner.jpg', title: 'Gelişmiş Görüntüleme' },
-  { image: '/gallery/smile.jpg', title: 'Doğal Gülüşler' },
-  { image: '/gallery/consultation.jpg', title: 'Birebir Danışmanlık' },
-  { image: '/gallery/details.jpg', title: 'Hijyen Standartları' },
+  { image: '/gallery/scanner.jpg', title: 'Dijital Röntgen & Görüntüleme' },
+  { image: '/gallery/smile.jpg', title: 'Doğal Gülüş Estetiği' },
+  { image: '/gallery/consultation.jpg', title: 'Şeffaf Tedavi Planlaması' },
+  { image: '/gallery/details.jpg', title: 'Maksimum Hijyen Standartları' },
 ]
 
 export default function GallerySection() {
   return (
     <section className="clinic-gallery-section" id="gallery">
       <div className="clinic-gallery-header" data-reveal>
-        <span className="gallery-minimal-eyebrow">GALERİ</span>
-        <h2 className="gallery-minimal-title">Kliniğimizden Kareler</h2>
+        <span className="gallery-minimal-eyebrow">KLİNİK ORTAMI</span>
+        <h2 className="gallery-minimal-title">Modern, Ferah ve Konforlu Alanlarımız</h2>
       </div>
 
       <div className="drift-wall-container">

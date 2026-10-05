@@ -32,6 +32,7 @@ function App() {
         onContactClick={() => setIsBookingOpen(true)}
       />
       <Hero
+        onBookConsultation={() => setIsBookingOpen(true)}
         onWatchStory={() => setIsStoryOpen(true)}
       />
       <AboutClinicStory />

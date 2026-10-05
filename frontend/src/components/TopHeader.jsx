@@ -6,16 +6,16 @@ export default function TopHeader({ onDiscoverClick }) {
       <div className="top-header-inner">
         {/* Left: Announcement / Feature Pill */}
         <div className="top-header-left">
-          <span className="top-apple-badge">2026</span>
+          <span className="top-apple-badge">ÇANKIRI</span>
           <span className="top-header-text">
-            Çankırı'da Hizmetinizdeyiz — Yeni Nesil Estetik ve Dijital Diş Hekimliği
+            Bilimsel hassasiyet, sanatsal dokunuş — Kişiye özgü doğal hekimlik.
           </span>
           <button
             type="button"
             className="top-header-link"
             onClick={onDiscoverClick}
           >
-            <span>Kliniğimizi Keşfedin</span>
+            <span>Kliniğimizi Tanıyın</span>
             <span className="apple-chevron">›</span>
           </button>
         </div>

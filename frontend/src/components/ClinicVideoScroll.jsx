@@ -265,7 +265,7 @@ export default function ClinicVideoScroll() {
                   opacity: line1Opacity,
                 }}
               >
-                Her  gülüş <span className='gulus-gradient-word'>kendi hikayesini yazar.</span> 
+                Her detayında özen, <span className='gulus-gradient-word'>her adımda güven.</span> 
               </h2>
 
               {/* Line 2: Arrives underneath Line 1 (Line 1 stays visible!) */}
@@ -276,7 +276,7 @@ export default function ClinicVideoScroll() {
                   opacity: line2Opacity,
                 }}
               >
-                Gülüşünüz en değerli imzanız.
+                Gülüşünüz, en değerli imzanız.
               </h2>
             </div>
           </div>

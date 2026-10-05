@@ -5,39 +5,39 @@ import './TeamSection.css'
 const teamMembers = [
   {
     id: '01',
-    name: 'Dr. Ayşe Yılmaz',
-    role: 'Ortodonti Uzmanı',
-    specialty: 'Şeffaf Plak & Dijital Çene Modelleme',
-    experience: '12+ Yıl Klinik Deneyim',
-    image:
-      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1000&q=85',
-  },
-  {
-    id: '02',
-    name: 'Dr. Mehmet Kaya',
-    role: 'İmplantoloji & Çene Cerrahisi',
-    specialty: '3D Kılavuzlu İmplant & Kemik Cerrahisi',
-    experience: '15+ Yıl Klinik Deneyim',
+    name: 'Dt. Mert Çıtak',
+    role: 'Kurucu Diş Hekimi',
+    specialty: 'Estetik Diş Hekimliği & İmplantoloji',
+    experience: 'Klinik Direktörü',
     image:
       'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=1000&q=85',
   },
   {
-    id: '03',
-    name: 'Dr. Elif Demir',
-    role: 'Estetik Diş Hekimliği',
-    specialty: 'Porselen Lamine & Dijital Gülüş Tasarımı',
-    experience: '10+ Yıl Klinik Deneyim',
+    id: '02',
+    name: 'Dr. Ayşe Yılmaz',
+    role: 'Ortodonti Uzmanı',
+    specialty: 'Şeffaf Plak & Dijital Çene Modelleme',
+    experience: 'Ortodonti & Şeffaf Plak',
     image:
-      'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1000&q=85',
+  },
+  {
+    id: '03',
+    name: 'Dr. Mehmet Kaya',
+    role: 'Ağız, Diş ve Çene Cerrahisi',
+    specialty: '3D Kılavuzlu İmplant & Cerrahi',
+    experience: 'Çene Cerrahisi',
+    image:
+      'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=1000&q=85',
   },
   {
     id: '04',
-    name: 'Dr. Burak Arslan',
-    role: 'Protetik Diş Tedavisi & Endodonti',
-    specialty: 'Mikroskobik Tedavi & Zirkonyum Restorasyon',
-    experience: '9+ Yıl Klinik Deneyim',
+    name: 'Dr. Elif Demir',
+    role: 'Restoratif & Estetik Tedaviler',
+    specialty: 'Porselen Lamine & Gülüş Tasarımı',
+    experience: 'Gülüş Estetiği',
     image:
-      'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=85',
   },
 ]
 
@@ -201,16 +201,16 @@ export default function TeamSection() {
         <div className="team-top-container">
           <div className="team-heading-block">
             <div className="team-eyebrow" data-reveal data-reveal-delay="1">
-              <span>TEKNİK EKİBİMİZ</span>
+              <span>HEKİMLERİMİZ & EKİBİMİZ</span>
             </div>
 
             <h2 className="team-headline" data-reveal data-reveal-delay="2">
-              Alanında uzman,<br />
-              güvenilir bir ekip.
+              Deneyim ve uzmanlıkla,<br />
+              güvenli ellerdesiniz.
             </h2>
 
             <p className="team-subtext" data-reveal data-reveal-delay="3">
-              Her tedavinin arkasında deneyim, teknoloji ve birlikte çalışan uzman bir ekip var.
+              Sağlığınızı ve gülüş estetiğinizi, alanında uzman hekimlerimiz ve multidisipliner tedavi anlayışımızla titizlikle planlıyoruz.
             </p>
           </div>
 

@@ -10,35 +10,35 @@ gsap.registerPlugin(ScrollTrigger)
 export const clinicStoryChapters = [
   {
     id: '01',
-    label: 'FELSEFEMİZ',
-    sublabel: 'Modern Klinik & Özgün Mimari',
-    headline: 'Modern diş hekimliği,\nkişisel yaklaşım ile başlar.',
+    label: 'YAKLAŞIMIMIZ',
+    sublabel: 'Kişiye Özel Tedavi Anlayışı',
+    headline: 'Kişiye özel planlama,\ndoğal ve kalıcı sonuçlar.',
     description:
-      'Her gülüş kendine özgü bir hikaye taşır. Tedaviyi sadece teknik bir işlem olarak değil, hastanın yüz anatomisi ve yaşam tarzıyla uyumlu bir zanaat olarak görüyoruz.',
+      'Her hastamızın yüz harmonisi, ağız anatomisi ve beklentisi kendine özgüdür. Tedavilerimizi standart kalıplarla değil; biyolojik dokulara saygılı ve size özel bir hassasiyetle tasarlıyoruz.',
   },
   {
     id: '02',
-    label: 'TEKNOLOJİ',
-    sublabel: '3D Dijital Tarama & Hassasiyet',
-    headline: 'İleri teknoloji,\ndaha kontrollü tedavi.',
+    label: 'DİJİTAL TEKNOLOJİ',
+    sublabel: '3D Ağız İçi Tarama & Hassasiyet',
+    headline: 'Milimetrik hassasiyet,\nhızlı ve konforlu süreç.',
     description:
-      '3D dijital ağız içi tarayıcılar, mikroskobik hassasiyet ve bilgisayar destekli kılavuzlar sayesinde hata payını sıfıra indiriyor, tedavi süresini kısaltıyoruz.',
+      'Rahatsız edici geleneksel ölçü yöntemlerini geride bıraktık. 3D dijital tarayıcılar ve bilgisayar destekli kılavuzlarla hata payını sıfıra indiriyor, tedavi süresini belirgin şekilde kısaltıyoruz.',
   },
   {
     id: '03',
-    label: 'DENEYİM',
-    sublabel: 'Birebir Güvenli Konsültasyon',
-    headline: 'Her hastanın ihtiyacı farklı.\nTedavi planımız da öyle.',
+    label: 'KLİNİK KONFORU',
+    sublabel: 'Huzurlu & Şeffaf Bir Deneyim',
+    headline: 'Kaygıdan uzak,\ngüven veren sakin ortam.',
     description:
-      'Klasik kalıpları bir kenara bırakıyoruz. Sizi dinliyor, kaygılarınızı anlıyor ve her aşamayı birlikte şeffaflıkla planladığımız konforlu bir klinik deneyimi sunuyoruz.',
+      'Sizi dikkatle dinliyor, tüm tedavi adımlarını şeffaflıkla paylaşıyoruz. Dinlendirici mimarimiz ve güler yüzlü ekibimizle, diş hekimi randevularını konforlu ve huzurlu bir deneyime dönüştürüyoruz.',
   },
   {
     id: '04',
-    label: 'SİZİN İÇİN',
-    sublabel: 'Doğal & Sağlıklı Gülüş Estetiği',
-    headline: 'Çünkü her gülüş\nkendine özgüdür.',
+    label: 'FONKSİYON & ESTETİK',
+    sublabel: 'Ömür Boyu Sağlıklı Çözümler',
+    headline: 'Hem sağlıklı fonksiyon,\nhem ışıltılı bir gülüş.',
     description:
-      'Kliniğimizden ayrıldığınızda sadece sağlıklı dişlere değil, hayatınıza değer katan özgüvenli ve doğal bir gülümsemeye kavuşmanız en büyük motivasyonumuz.',
+      'Yalnızca estetik bir görünümü değil; ideal çiğneme fonksiyonunu ve ömür boyu koruyabileceğiniz ağız sağlığını hedefliyoruz. Amacımız, kliniğimizden her an güvenle gülümseyerek ayrılmanız.',
   },
 ]
 
@@ -445,11 +445,11 @@ export default function AboutClinicStory() {
           <div className="mobile-about-header">
             <span className="mobile-about-eyebrow" data-reveal>HAKKIMIZDA</span>
             <h2 className="mobile-about-title" data-reveal data-reveal-delay="1">
-              Modern Diş Hekimliği,<br />
-              Kişisel Yaklaşım.
+              Kişiye Özel Planlama,<br />
+              Doğal Sonuçlar.
             </h2>
             <p className="mobile-about-intro" data-reveal data-reveal-delay="2">
-              Her hastanın ihtiyacı farklı. Kliniğimizde ileri teknoloji ve hekimlik zanaatını birleştiriyoruz.
+              İleri dijital teknolojiler ve özenli hekimlik yaklaşımıyla, her gülüşü kendi doğal harmonisine kavuşturuyoruz.
             </p>
           </div>
 

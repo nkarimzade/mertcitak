@@ -1,140 +1,150 @@
-import { useState } from 'react'
 import SplitText from './SplitText'
 import './Hero.css'
 
 export default function Hero({ onBookConsultation, onWatchStory }) {
-  const [headlineComplete, setHeadlineComplete] = useState(false)
-
-  const handleHeadlineComplete = () => {
-    setHeadlineComplete(true)
-  }
+  const topSlats = [
+    'İleri Diş Hekimliği',
+    'Yüksek Kalite Ekipman & 3D Tarama',
+    'Uzman ve Samimi Kadro',
+  ]
 
   return (
-    <section className="hero-section" id="home">
-      {/* Background Graphic Layer */}
-      <div
-        className="hero-bg"
-        role="img"
-        aria-label="Mert Çıtak Diş Kliniği 3D İmplant görsel arka planı"
-      >
-        {/* Cloud Atmosphere Effect: Full Bottom Sweep from Right to Far Left */}
-        <div className="hero-cloud-flow" aria-hidden="true">
-          <div className="cloud-puff cloud-puff-floor"></div>
-          <div className="cloud-puff cloud-puff-right"></div>
-          <div className="cloud-puff cloud-puff-mid"></div>
-          <div className="cloud-puff cloud-puff-center"></div>
-          <div className="cloud-puff cloud-puff-left"></div>
-          <div className="cloud-puff cloud-puff-far-left"></div>
-          <div className="cloud-puff cloud-puff-ambient"></div>
-        </div>
+    <section className="dental-hero" id="home">
+      {/* Tek ve Ana Hero Görseli: En arkada yer alır (z-index: 1) */}
+      <div className="dental-hero-bg-layer" aria-hidden="true">
+        <img
+          src="/home/hero.png"
+          alt="Mert Çıtak Diş Kliniği Estetik Gülüş"
+          className="dental-bg-full-img"
+        />
       </div>
 
-      {/* Left Scroll Indicator */}
-      <div
-        className="hero-scroll-indicator"
-        data-reveal="fade"
-        data-reveal-delay="4"
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        style={{ cursor: 'pointer' }}
-        title="Kliniğimizi Keşfedin"
-      >
-        <span className="scroll-text">KAYDIR</span>
-        <div className="scroll-line"></div>
-      </div>
+      <div className="dental-hero-container">
 
-      {/* Main Content Area */}
-      <div className="hero-main-container">
-        {/* Left Column: Headline and CTAs */}
-        <div className="hero-left-column">
-          <SplitText
-            tag="div"
-            className="hero-tagline-eyebrow"
-            text="ÇANKIRI'NIN YENİ DİŞ KLİNİĞİ"
-            textAlign="left"
-            delay={20}
-            duration={0.8}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 20 }}
-            to={{ opacity: 0.95, y: 0 }}
-            threshold={0.1}
-            rootMargin="-50px"
-            play={headlineComplete}
-          />
+        {/* 1. Üst Bilgi Şeritleri */}
+        <div className="dental-hero-slats-wrap" role="list">
+          <div className="dental-slat-gap-cover top-cover" aria-hidden="true" />
 
-          <SplitText
-            tag="h1"
-            className="hero-headline"
-            text={"Gülüşünüze\nDeğer Katan\nKusursuzluk"}
-            style={{ whiteSpace: 'pre-line' }}
-            textAlign="left"
-            delay={35}
-            duration={1.15}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-50px"
-            play={true}
-            onLetterAnimationComplete={handleHeadlineComplete}
-          />
-
-          <SplitText
-            tag="p"
-            className="hero-description"
-            text="Daha sağlıklı ve özgüvenli bir gülüş için ileri dijital teknoloji, uzman hekimlik ve kişiye özel estetik yaklaşım."
-            textAlign="left"
-            delay={20}
-            duration={0.9}
-            ease="power3.out"
-            splitType="words"
-            from={{ opacity: 0, y: 20 }}
-            to={{ opacity: 0.92, y: 0 }}
-            threshold={0.1}
-            rootMargin="-50px"
-            play={headlineComplete}
-          />
-
-          <div
-            className="hero-cta-group"
-            style={{
-              opacity: headlineComplete ? 1 : 0,
-              transform: headlineComplete ? 'translateY(0)' : 'translateY(16px)',
-              transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s',
-              pointerEvents: headlineComplete ? 'auto' : 'none'
-            }}
-          >
-            <button
-              type="button"
-              className="btn-watch-story"
-              onClick={onWatchStory}
-            >
-              <span className="play-icon-circle">
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-              </span>
-              <span className="watch-story-text">Hikayemizi İzleyin</span>
-            </button>
+          <div className="dental-hero-slat" role="listitem">
+            <span className="dental-slat-label">Yüz Anatomisiyle Uyumlu Estetik</span>
           </div>
-        </div>
-      </div>
 
-      {/* Bottom Information Strip (Slider removed) */}
-      <div className="hero-bottom-strip" data-reveal data-reveal-delay="5">
-        <div className="bottom-metrics">
-          <span>Modern Diş Hekimliği</span>
-          <span className="separator">/</span>
-          <span>İleri Teknoloji</span>
-          <span className="separator">/</span>
-          <span>Kuruluş 2026</span>
+          <div className="dental-slat-gap-cover" aria-hidden="true" />
+
+          <div className="dental-hero-slat" role="listitem">
+            <span className="dental-slat-label">3D Dijital Planlama & Hassas Teşhis</span>
+          </div>
+
+          <div className="dental-slat-gap-cover" aria-hidden="true" />
+
+          <div className="dental-hero-slat" role="listitem">
+            <span className="dental-slat-label">Hekimlik Disiplini & Bütünsel Yaklaşım</span>
+          </div>
+
+          <div className="dental-slat-gap-cover bottom-cover" aria-hidden="true" />
         </div>
+
+        {/* 2. Ana Asimetrik Hero Kartı */}
+        <div className="dental-hero-bento">
+
+          {/* Sol Kolon: Beyaz Zeminli Alan & Devasa Tipografi */}
+          <div className="dental-bento-left">
+            <div className="dental-meta-top">
+              <SplitText
+                tag="p"
+                className="dental-lead-statement"
+                text="Her tebessüm, sahibine özgü bir ifade taşır. İleri hekimlik tekniklerini yüzün doğal ahengiyle buluşturuyor; yapaylıktan uzak, yaşayan bir zarafet sunuyoruz."
+                textAlign="left"
+                delay={18}
+                duration={0.85}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 18 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.05}
+                rootMargin="0px"
+                play={true}
+              />
+            </div>
+
+            <div className="dental-title-group">
+              <SplitText
+                tag="span"
+                className="dental-eyebrow-tag"
+                text="MERT ÇITAK • ESTETİK & DİJİTAL DİŞ HEKİMLİĞİ"
+                textAlign="left"
+                delay={20}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 15 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.05}
+                rootMargin="0px"
+                play={true}
+              />
+
+              <SplitText
+                tag="h1"
+                className="dental-monumental-title"
+                text={"Gülüşünüze Değer\nKatan Kusursuzluk"}
+                style={{ whiteSpace: 'pre-line' }}
+                textAlign="left"
+                delay={30}
+                duration={1.1}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 35 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.05}
+                rootMargin="0px"
+                play={true}
+              />
+
+            </div>
+          </div>
+
+          {/* Sağ Kolon: Şeffaf Zemin (Tek ana hero görseli doğrudan görünür) */}
+          <div className="dental-bento-right">
+            <div className="dental-right-editorial">
+              <SplitText
+                tag="h2"
+                className="dental-statement-quote"
+                text={"Gerçek estetik,\nözünüzle parlar."}
+                style={{ whiteSpace: 'pre-line' }}
+                textAlign="right"
+                delay={30}
+                duration={1.0}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 25 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.05}
+                rootMargin="0px"
+                play={true}
+              />
+
+              <div className="dental-actions-cluster">
+                <button
+                  type="button"
+                  className="btn-dental-watch-story"
+                  onClick={onWatchStory}
+                  id="hero-video-btn"
+                >
+                  <span className="dental-play-circle" aria-hidden="true">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </span>
+                  <span>Kliniğimizi Keşfedin</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
       </div>
     </section>
   )

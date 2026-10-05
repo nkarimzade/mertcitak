@@ -15,14 +15,14 @@ export default function BookingModal({ isOpen, onClose }) {
 
         {/* Title */}
         <div className="simple-modal-head">
-          <h3 className="simple-modal-title">İletişim</h3>
-          <span className="simple-modal-sub">Mert Çıtak Diş Kliniği</span>
+          <h3 className="simple-modal-title">Randevu & Danışma</h3>
+          <span className="simple-modal-sub">Özel Mert Çıtak Diş Kliniği</span>
         </div>
 
         {/* Side-by-side Minimal Action Rows */}
         <div className="simple-modal-links side-by-side">
           <a
-            href="https://wa.me/905452011918?text=Merhaba,%20klini%C4%9Finiz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+            href="https://wa.me/905452011918?text=Merhaba,%20klini%C4%9Finiz%20hakk%C4%B1nda%20bilgi%20ve%20randevu%20almak%20istiyorum."
             target="_blank"
             rel="noopener noreferrer"
             className="simple-modal-item"
@@ -31,7 +31,7 @@ export default function BookingModal({ isOpen, onClose }) {
               <FaWhatsapp size={18} />
             </div>
             <div className="simple-item-info">
-              <span className="simple-item-label">WhatsApp</span>
+              <span className="simple-item-label">WhatsApp Hattı</span>
               <strong className="simple-item-value">0545 201 19 18</strong>
             </div>
           </a>
@@ -41,7 +41,7 @@ export default function BookingModal({ isOpen, onClose }) {
               <FiPhone size={16} />
             </div>
             <div className="simple-item-info">
-              <span className="simple-item-label">Telefon</span>
+              <span className="simple-item-label">Telefonla Arayın</span>
               <strong className="simple-item-value">0545 201 19 18</strong>
             </div>
           </a>
@@ -51,7 +51,7 @@ export default function BookingModal({ isOpen, onClose }) {
         <div className="simple-modal-foot">
           <span>İkizler İş Merkezi, Çankırı</span>
           <span>•</span>
-          <span>09:00 – 19:00</span>
+          <span>Pzt – Cmt: 09:00 – 19:00</span>
         </div>
       </div>
     </div>
