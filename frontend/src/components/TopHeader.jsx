@@ -8,7 +8,7 @@ export default function TopHeader({ onDiscoverClick }) {
         <div className="top-header-left">
           <span className="top-apple-badge">ÇANKIRI</span>
           <span className="top-header-text">
-            Bilimsel hassasiyet, sanatsal dokunuş — Kişiye özgü doğal hekimlik.
+            İmplant, zirkonyum kaplama ve diş tedavisi — İkizler İş Merkezi, Çankırı.
           </span>
           <button
             type="button"

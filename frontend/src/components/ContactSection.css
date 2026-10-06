@@ -1,0 +1,627 @@
+/* ========================================================
+   Untitled UI Aesthetic Contact Section (Dt. Mert Çıtak)
+   ======================================================== */
+
+.untitled-contact-section {
+  position: relative;
+  background: #f8fafc;
+  padding: 80px 24px 40px;
+  box-sizing: border-box;
+}
+
+.untitled-contact-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Main Outer Card Container */
+.untitled-contact-card {
+  background: #ffffff;
+  border-radius: 36px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 65px -15px rgba(15, 23, 42, 0.07);
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 48px;
+  padding: 44px 44px 44px 52px;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   LEFT COLUMN: FORM
+   ======================================================== */
+.untitled-form-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 520px;
+}
+
+/* Brand Mark / Logo */
+.untitled-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.brand-star-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+/* Form Main Title */
+.untitled-form-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(26px, 2.7vw, 36px);
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin: 0 0 32px;
+}
+
+/* Form Body */
+.untitled-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.untitled-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.untitled-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.untitled-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: -0.01em;
+}
+
+.untitled-input,
+.untitled-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14.5px;
+  color: #0f172a;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.untitled-textarea {
+  resize: vertical;
+  min-height: 78px;
+  line-height: 1.5;
+}
+
+.untitled-input:focus,
+.untitled-textarea:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.untitled-input::placeholder,
+.untitled-textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* Phone input with country prefix pill */
+.untitled-phone-input-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.untitled-phone-input-wrap:focus-within {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.untitled-country-prefix {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  background: #f8fafc;
+  border-right: 1.5px solid #e2e8f0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  user-select: none;
+}
+
+.untitled-phone-input {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Services (2 Columns of Checkboxes) */
+.untitled-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin-top: 4px;
+}
+
+.untitled-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+}
+
+.untitled-custom-checkbox {
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+}
+
+.untitled-custom-checkbox.checked {
+  background: #0f172a;
+  border-color: #0f172a;
+}
+
+.untitled-checkbox-label {
+  font-size: 13.5px;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.untitled-checkbox-item:hover .untitled-custom-checkbox:not(.checked) {
+  border-color: #94a3b8;
+}
+
+/* Submit Button: Solid Dark/Black rounded button (like Untitled UI) */
+.untitled-submit-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+  transition: all 0.22s ease;
+  margin-top: 6px;
+}
+
+.untitled-submit-btn:hover:not(:disabled) {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.24);
+}
+
+.untitled-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Foot Direct Phone Note */
+.untitled-foot-note {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.untitled-phone-link {
+  color: #0f172a;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.untitled-phone-link:hover {
+  color: #0284c7;
+}
+
+/* Success State */
+.untitled-success-state {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.untitled-success-badge {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.16);
+}
+
+.untitled-success-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px;
+}
+
+.untitled-success-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #475569;
+  max-width: 420px;
+  margin: 0 auto 26px;
+}
+
+.untitled-success-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.untitled-wa-direct-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  background: #25d366;
+  color: #ffffff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.22s ease;
+}
+
+.untitled-wa-direct-btn:hover {
+  background: #20bd5a;
+  transform: translateY(-2px);
+}
+
+.untitled-reset-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.untitled-reset-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ========================================================
+   RIGHT COLUMN: SCALLOPED PHOTO CARD
+   ======================================================== */
+.untitled-photo-col {
+  display: flex;
+  align-items: stretch;
+  filter: drop-shadow(0 24px 50px rgba(15, 23, 42, 0.14));
+}
+
+.untitled-photo-frame {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  clip-path: url(#untitledScallopClip);
+  -webkit-clip-path: url(#untitledScallopClip);
+  border-radius: 40px; /* Fallback for browsers without SVG clip-path */
+  overflow: hidden;
+  background: #0f172a;
+}
+
+/* Showcase Image */
+.untitled-showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Gentle Scrim for Text Readability */
+.untitled-photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.15) 0%,
+    transparent 35%,
+    rgba(15, 23, 42, 0.45) 70%,
+    rgba(15, 23, 42, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+/* Floating Glass Doctor Badge (Middle Right, over doctor) */
+.untitled-glass-doctor-badge {
+  position: absolute;
+  top: 42%;
+  right: 28px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  padding: 10px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  animation: floatSubtle 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatSubtle {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.doctor-badge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.doctor-badge-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.doctor-badge-handle {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.doctor-badge-loc {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Bottom Content Inside Photo */
+.untitled-photo-bottom-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 32px 28px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Italic Serif Editorial Tagline (Matching Reference Screenshot) */
+.untitled-editorial-quote {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(23px, 2.5vw, 32px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+}
+
+/* 2 Floating Glass Feature Pills (Matching Reference Screenshot) */
+.untitled-glass-pills-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.untitled-glass-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.untitled-glass-pill:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+}
+
+.glass-pill-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.glass-pill-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.glass-pill-text strong {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.glass-pill-text span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+}
+
+/* ========================================================
+   BOTTOM FOOTER LINE
+   ======================================================== */
+.untitled-bottom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 12px 10px;
+  font-size: 13px;
+  color: #94a3b8;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-links-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-links-row a {
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-links-row a:hover {
+  color: #0f172a;
+}
+
+/* ========================================================
+   RESPONSIVE QUERIES
+   ======================================================== */
+@media (max-width: 1024px) {
+  .untitled-contact-card {
+    grid-template-columns: 1fr;
+    padding: 36px 30px;
+    gap: 40px;
+  }
+
+  .untitled-form-col {
+    max-width: 100%;
+  }
+
+  .untitled-photo-frame {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .untitled-contact-section {
+    padding: 50px 14px 30px;
+  }
+
+  .untitled-contact-card {
+    border-radius: 26px;
+    padding: 26px 18px;
+    gap: 32px;
+  }
+
+  .untitled-row-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .untitled-services-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .untitled-photo-frame {
+    min-height: 420px;
+    border-radius: 26px;
+  }
+
+  .untitled-glass-pills-row {
+    grid-template-columns: 1fr;
+  }
+
+  .untitled-photo-bottom-content {
+    padding: 20px 18px;
+  }
+
+  .untitled-editorial-quote {
+    font-size: 21px;
+  }
+
+  .untitled-glass-doctor-badge {
+    top: 24px;
+    right: 18px;
+  }
+
+  .untitled-bottom-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}

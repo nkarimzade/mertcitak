@@ -33,9 +33,6 @@ export default function ClinicVideoScroll() {
     const v2 = video2Ref.current
     if (!v1 || !v2) return
 
-    v1.playbackRate = 1.35
-    v2.playbackRate = 1.35
-
     const BLACK_TRIM_SECONDS = 0.6 // Siyah kareleri kırpma süresi
     const CROSSFADE_DURATION_SECONDS = 0.55 // Yumuşak erime geçiş süresi
 
@@ -53,7 +50,6 @@ export default function ClinicVideoScroll() {
 
         // Diğer videoyu baştan pürüzsüzce başlat
         nextVideo.currentTime = 0.05
-        nextVideo.playbackRate = 1.35
         nextVideo.play().catch(() => {})
 
         // Aktif katmanı değiştirerek CSS crossfade tetikle
@@ -105,9 +101,9 @@ export default function ClinicVideoScroll() {
     }
 
     const updateLoop = () => {
-      // Smooth and responsive lerp
-      currentProgress += (targetProgress - currentProgress) * 0.22
-      currentExpand += (targetExpand - currentExpand) * 0.18
+      // Gentle, luxurious lerp for calm, premium pacing
+      currentProgress += (targetProgress - currentProgress) * 0.12
+      currentExpand += (targetExpand - currentExpand) * 0.14
 
       setScrollProgress(currentProgress)
 
@@ -149,34 +145,46 @@ export default function ClinicVideoScroll() {
     }
   }, [])
 
-  // Fast, punchy entrance: Line 1 arrives rapidly from below
-  let line1Y = 50
-  let line1Opacity = 0
-  if (scrollProgress >= 0.04) {
-    const t1 = Math.min(Math.max((scrollProgress - 0.04) / 0.06, 0), 1)
-    const ease1 = 1 - Math.pow(1 - t1, 4)
-    line1Y = (1 - ease1) * 50
-    line1Opacity = Math.min(1, t1 * 6)
+  // Word-by-word scroll animation helper (gentle, clear pacing)
+  const getWordStyle = (start, duration = 0.055) => {
+    if (scrollProgress < start) {
+      return {
+        opacity: 0,
+        transform: 'translate3d(0, 18px, 0)',
+      }
+    }
+    const t = Math.min(Math.max((scrollProgress - start) / duration, 0), 1)
+    const ease = 1 - Math.pow(1 - t, 3)
+    const y = (1 - ease) * 18
+    return {
+      opacity: ease,
+      transform: `translate3d(0, ${y.toFixed(2)}px, 0)`,
+    }
   }
 
-  // Line 2 shoots up quickly from below right underneath Line 1
-  let line2Y = 45
-  let line2Opacity = 0
-  if (scrollProgress >= 0.15) {
-    const t2 = Math.min(Math.max((scrollProgress - 0.15) / 0.06, 0), 1)
-    const ease2 = 1 - Math.pow(1 - t2, 4)
-    line2Y = (1 - ease2) * 45
-    line2Opacity = Math.min(1, t2 * 6)
-  }
-
-  // Both lines exit together smoothly at the end of section
+  // Both lines stay locked on screen, only gently exiting at the very end (0.94+)
   let exitY = 0
   let exitOpacity = 1
-  if (scrollProgress > 0.88) {
-    const tExit = Math.min(Math.max((scrollProgress - 0.88) / 0.10, 0), 1)
-    exitY = -tExit * 35
-    exitOpacity = Math.max(0, 1 - tExit * 1.5)
+  if (scrollProgress > 0.94) {
+    const tExit = Math.min(Math.max((scrollProgress - 0.94) / 0.055, 0), 1)
+    exitY = -tExit * 28
+    exitOpacity = Math.max(0, 1 - tExit)
   }
+
+  const line1Words = [
+    { text: 'Her' },
+    { text: 'gülüş,' },
+    { text: 'yeni' },
+    { text: 'bir' },
+    { text: 'başlangıç.' },
+  ]
+
+  const line2Words = [
+    { text: 'Gülüşünüz,' },
+    { text: 'en', isGradient: true },
+    { text: 'değerli', isGradient: true },
+    { text: 'imzanız.', isGradient: true },
+  ]
 
   return (
     <section className="clinic-video-scroll-track" ref={sectionRef} id="clinic-video">
@@ -191,9 +199,6 @@ export default function ClinicVideoScroll() {
             autoPlay
             muted
             playsInline
-            onLoadedMetadata={(e) => {
-              e.target.playbackRate = 1.35
-            }}
           />
           <video
             ref={video2Ref}
@@ -201,15 +206,9 @@ export default function ClinicVideoScroll() {
             src="/Video/teeth.mp4"
             muted
             playsInline
-            onLoadedMetadata={(e) => {
-              e.target.playbackRate = 1.35
-            }}
           />
 
-          {/* Video Overlay */}
-          <div className="clinic-video-overlay" />
-
-          {/* Top Floating Glass Header Matching Reference Screenshot */}
+          {/* Top Floating Glass Header */}
           <div className="clinic-video-floating-nav">
             {/* Left: Glass Circle Brand Badge */}
             <div className="video-glass-circle-btn" title="Mert Çıtak Diş Kliniği">
@@ -248,7 +247,7 @@ export default function ClinicVideoScroll() {
             </div>
           </div>
 
-          {/* 2-Line Editorial Typography (Matching Reference Screenshot) */}
+          {/* 2-Line Editorial Typography - Revealed Word by Word on Scroll */}
           <div
             className="video-scroll-center-content"
             style={{
@@ -257,26 +256,40 @@ export default function ClinicVideoScroll() {
             }}
           >
             <div className="reference-headline-block">
-              {/* Line 1: Arrives first */}
-              <h2
-                className="reference-line reference-line-1"
-                style={{
-                  transform: `translate3d(0, ${line1Y.toFixed(2)}px, 0)`,
-                  opacity: line1Opacity,
-                }}
-              >
-                Her detayında özen, <span className='gulus-gradient-word'>her adımda güven.</span> 
+              {/* Line 1: Her gülüş, yeni bir başlangıç. */}
+              <h2 className="reference-line reference-line-1">
+                {line1Words.map((word, idx) => {
+                  const start = 0.08 + idx * 0.05
+                  const style = getWordStyle(start, 0.06)
+                  return (
+                    <span
+                      key={idx}
+                      className={`scroll-word ${word.isGradient ? 'gulus-gradient-word' : ''}`}
+                      style={style}
+                    >
+                      {word.text}
+                      {idx < line1Words.length - 1 ? ' ' : ''}
+                    </span>
+                  )
+                })}
               </h2>
 
-              {/* Line 2: Arrives underneath Line 1 (Line 1 stays visible!) */}
-              <h2
-                className="reference-line reference-line-2"
-                style={{
-                  transform: `translate3d(0, ${line2Y.toFixed(2)}px, 0)`,
-                  opacity: line2Opacity,
-                }}
-              >
-                Gülüşünüz, en değerli imzanız.
+              {/* Line 2: Gülüşünüz, en değerli imzanız. */}
+              <h2 className="reference-line reference-line-2">
+                {line2Words.map((word, idx) => {
+                  const start = 0.48 + idx * 0.065
+                  const style = getWordStyle(start, 0.06)
+                  return (
+                    <span
+                      key={idx}
+                      className={`scroll-word ${word.isGradient ? 'gulus-gradient-word' : ''}`}
+                      style={style}
+                    >
+                      {word.text}
+                      {idx < line2Words.length - 1 ? ' ' : ''}
+                    </span>
+                  )
+                })}
               </h2>
             </div>
           </div>

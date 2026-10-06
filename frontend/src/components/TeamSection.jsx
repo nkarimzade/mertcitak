@@ -205,12 +205,12 @@ export default function TeamSection() {
             </div>
 
             <h2 className="team-headline" data-reveal data-reveal-delay="2">
-              Deneyim ve uzmanlıkla,<br />
-              güvenli ellerdesiniz.
+              Sorularınızı dinleyen,<br />
+              yanınızda bir ekip.
             </h2>
 
             <p className="team-subtext" data-reveal data-reveal-delay="3">
-              Sağlığınızı ve gülüş estetiğinizi, alanında uzman hekimlerimiz ve multidisipliner tedavi anlayışımızla titizlikle planlıyoruz.
+              İmplant, şeffaf plak ve diş kaplama süreçlerinizde hekimlerimiz muayenenizi titizlikle yapar, tüm sorularınızı açıkça yanıtlar.
             </p>
           </div>
 

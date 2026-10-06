@@ -5,7 +5,9 @@ import Hero from './components/Hero'
 import AboutClinicStory from './components/AboutClinicStory'
 import TeamSection from './components/TeamSection'
 import ClinicVideoScroll from './components/ClinicVideoScroll'
+import GoogleReviews from './components/GoogleReviews'
 import GallerySection from './components/GallerySection'
+import ContactSection from './components/ContactSection'
 import StoryModal from './components/StoryModal'
 import BookingModal from './components/BookingModal'
 import { initScrollReveal } from './utils/scrollReveal'
@@ -35,10 +37,12 @@ function App() {
         onBookConsultation={() => setIsBookingOpen(true)}
         onWatchStory={() => setIsStoryOpen(true)}
       />
+      <ClinicVideoScroll />
       <AboutClinicStory />
       <TeamSection />
-      <ClinicVideoScroll />
+      <GoogleReviews />
       <GallerySection />
+      <ContactSection />
       <StoryModal
         isOpen={isStoryOpen}
         onClose={() => setIsStoryOpen(false)}

@@ -35,9 +35,10 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
 
   const navItems = [
     { label: 'Ana Sayfa', href: '#home' },
+    { label: 'Kliniğimiz', href: '#clinic-video' },
     { label: 'Hakkımızda', href: '#about' },
     { label: 'Ekibimiz', href: '#team' },
-    { label: 'Kliniğimiz', href: '#clinic-video' },
+    { label: 'Yorumlar', href: '#reviews' },
     { label: 'Galeri', href: '#gallery' },
     { label: 'İletişim', href: '#contact' },
   ]
@@ -45,10 +46,6 @@ export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: cont
   const handleNavClick = (label, href) => {
     setActiveNav(label)
     setMenuOpen(false)
-    if (href === '#contact' && onContactClick) {
-      onContactClick()
-      return
-    }
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })

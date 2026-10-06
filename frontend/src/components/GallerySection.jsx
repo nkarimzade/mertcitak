@@ -2,32 +2,37 @@ import DriftWall from './DriftWall'
 import './GallerySection.css'
 
 const items = [
-  { image: '/gallery/lounge.jpg', title: 'Ferah Karşılama Alanı' },
-  { image: '/gallery/treatment.jpg', title: 'Modern Tedavi Ünitesi' },
-  { image: '/gallery/scanner.jpg', title: '3D Ağız İçi Tarama' },
-  { image: '/gallery/smile.jpg', title: 'Estetik Gülüş Tasarımı' },
-  { image: '/gallery/consultation.jpg', title: 'Birebir Konsültasyon' },
-  { image: '/gallery/details.jpg', title: 'Gelişmiş Sterilizasyon' },
-  { image: '/gallery/treatment.jpg', title: 'İmplant ve Cerrahi Odası' },
-  { image: '/gallery/lounge.jpg', title: 'Huzurlu Bekleme Alanı' },
-  { image: '/gallery/smile.jpg', title: 'Gülüş Analiz Stüdyosu' },
-  { image: '/gallery/scanner.jpg', title: 'Dijital Teşhis Ünitesi' },
-  { image: '/gallery/consultation.jpg', title: 'Hasta Dinlenme Alanı' },
-  { image: '/gallery/details.jpg', title: 'Yüksek Standartlı Ekipman' },
-  { image: '/gallery/lounge.jpg', title: 'Aydınlık Klinik Mimarisi' },
-  { image: '/gallery/treatment.jpg', title: 'Konforlu Tedavi Koltuğu' },
-  { image: '/gallery/scanner.jpg', title: 'Dijital Röntgen & Görüntüleme' },
-  { image: '/gallery/smile.jpg', title: 'Doğal Gülüş Estetiği' },
-  { image: '/gallery/consultation.jpg', title: 'Şeffaf Tedavi Planlaması' },
-  { image: '/gallery/details.jpg', title: 'Maksimum Hijyen Standartları' },
-]
+  { image: '/gallery/photo_one.png', title: 'Ferah Karşılama Alanı' },
+  { image: '/gallery/photo_three.png', title: 'Tedavi ve Muayene Ünitesi' },
+  { image: '/gallery/photo_two.png', title: '3D Ağız İçi Tarama' },
+
+  { image: '/gallery/photo_one.png', title: 'Zirkonyum ve Kaplama Uygulaması' },
+  { image: '/gallery/photo_three.png', title: 'Birebir Hekim Görüşmesi' },
+  { image: '/gallery/photo_two.png', title: 'Otoklav Sterilizasyon Ünitesi' },
+
+  { image: '/gallery/photo_three.png', title: 'İmplant ve Cerrahi Odası' },
+  { image: '/gallery/photo_one.png', title: 'Bekleme ve Dinlenme Salonu' },
+  { image: '/gallery/photo_two.png', title: 'Tedavi Öncesi Dijital Planlama' },
+
+  { image: '/gallery/photo_two.png', title: 'Dijital Röntgen & Görüntüleme' },
+  { image: '/gallery/photo_three.png', title: 'Hasta Dinlenme Alanı' },
+  { image: '/gallery/photo_one.png', title: 'Dijital Görüntüleme Cihazları' },
+
+  { image: '/gallery/photo_one.png', title: 'Danışma ve Randevu Alanı' },
+  { image: '/gallery/photo_three.png', title: 'Tedavi ve Muayene Koltuğu' },
+  { image: '/gallery/photo_two.png', title: 'Dijital Röntgen & Görüntüleme' },
+
+  { image: '/gallery/photo_two.png', title: 'Zirkonyum Kaplama Hazırlığı' },
+  { image: '/gallery/photo_three.png', title: 'Şeffaf Tedavi Planlaması' },
+  { image: '/gallery/photo_one.png', title: 'Otoklav Sterilizasyon Ünitesi' },
+];
 
 export default function GallerySection() {
   return (
     <section className="clinic-gallery-section" id="gallery">
       <div className="clinic-gallery-header" data-reveal>
         <span className="gallery-minimal-eyebrow">KLİNİK ORTAMI</span>
-        <h2 className="gallery-minimal-title">Modern, Ferah ve Konforlu Alanlarımız</h2>
+        <h2 className="gallery-minimal-title">Tedavi ve Muayene Odalarımız</h2>
       </div>
 
       <div className="drift-wall-container">

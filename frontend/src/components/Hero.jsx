@@ -26,19 +26,19 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
           <div className="dental-slat-gap-cover top-cover" aria-hidden="true" />
 
           <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">Yüz Anatomisiyle Uyumlu Estetik</span>
+            <span className="dental-slat-label">Tedavi Öncesi Dijital Gülüş Planı</span>
           </div>
 
           <div className="dental-slat-gap-cover" aria-hidden="true" />
 
           <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">3D Dijital Planlama & Hassas Teşhis</span>
+            <span className="dental-slat-label">Ölçü Kaşığı Olmadan 3D Ağız Taraması</span>
           </div>
 
           <div className="dental-slat-gap-cover" aria-hidden="true" />
 
           <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">Hekimlik Disiplini & Bütünsel Yaklaşım</span>
+            <span className="dental-slat-label">Ağrısız Anestezi ve Birebir Hekim İlgisi</span>
           </div>
 
           <div className="dental-slat-gap-cover bottom-cover" aria-hidden="true" />
@@ -53,7 +53,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
               <SplitText
                 tag="p"
                 className="dental-lead-statement"
-                text="Her tebessüm, sahibine özgü bir ifade taşır. İleri hekimlik tekniklerini yüzün doğal ahengiyle buluşturuyor; yapaylıktan uzak, yaşayan bir zarafet sunuyoruz."
+                text="Eksik dişleriniz için implant, kırık ve renk sorunları için zirkonyum kaplama uyguluyoruz. Tedavi adımlarını ve süresini ilk muayenede sizinle birlikte planlıyoruz."
                 textAlign="left"
                 delay={18}
                 duration={0.85}
@@ -71,7 +71,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
               <SplitText
                 tag="span"
                 className="dental-eyebrow-tag"
-                text="MERT ÇITAK • ESTETİK & DİJİTAL DİŞ HEKİMLİĞİ"
+                text="MERT ÇITAK • ÇANKIRI DİŞ SAĞLIĞI VE TEDAVİSİ"
                 textAlign="left"
                 delay={20}
                 duration={0.8}
@@ -87,7 +87,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
               <SplitText
                 tag="h1"
                 className="dental-monumental-title"
-                text={"Gülüşünüze Değer\nKatan Kusursuzluk"}
+                text={"Sağlıklı Dişler ve\nRahat Gülüşler"}
                 style={{ whiteSpace: 'pre-line' }}
                 textAlign="left"
                 delay={30}
@@ -110,7 +110,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
               <SplitText
                 tag="h2"
                 className="dental-statement-quote"
-                text={"Gerçek estetik,\nözünüzle parlar."}
+                text={"Kendi dişiniz gibi\nrahat çiğneyin."}
                 style={{ whiteSpace: 'pre-line' }}
                 textAlign="right"
                 delay={30}

@@ -1,0 +1,580 @@
+/* ========================================================
+   Google Reviews (Apple Aesthetic + Exact Visual Reference)
+   No Photos — Pure Colored Letter Avatars & Refined Glass/Card Finish
+   ======================================================== */
+
+.apple-google-section {
+  position: relative;
+  background: #fbfcfd;
+  padding: 105px 0 115px;
+  overflow: hidden;
+  width: 100%;
+  border-top: 1px solid #f1f4f8;
+}
+
+.apple-google-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+}
+
+/* ========================================================
+   Top Header Row (Left: Headline & Subtitle / Right: Rating Card)
+   ======================================================== */
+.apple-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.apple-header-left {
+  max-width: 620px;
+}
+
+.apple-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-dash {
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.eyebrow-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.apple-main-headline {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(34px, 4.4vw, 52px);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  margin: 0 0 18px;
+}
+
+.headline-bold {
+  color: #111827;
+  font-weight: 800;
+}
+
+.headline-muted {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.apple-subtitle-text {
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ========================================================
+   Google Aggregate Rating Hero Card (Top Right)
+   ======================================================== */
+.apple-google-hero-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 24px;
+  padding: 24px 30px;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.02);
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+/* Full Google Wordmark in Brand Colors */
+.google-wordmark-text {
+  font-family: 'Product Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.apple-g-star {
+  color: #fbbc04; /* Google brand gold */
+  font-size: 17px;
+}
+
+.hero-score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.hero-score-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.hero-score-max {
+  font-size: 15px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.hero-card-divider {
+  width: 1px;
+  height: 80px;
+  background: #eef2f6;
+}
+
+.hero-card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Overlapping Colored Letter Avatars Pile */
+.hero-avatars-pile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pile-letter-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid #ffffff;
+  margin-left: -9px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pile-letter-avatar:first-child {
+  margin-left: 0;
+}
+
+.pile-count-tag {
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  margin-left: -7px;
+}
+
+.hero-platform-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.hero-reviews-total {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hero-exp-label {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* ========================================================
+   Carousel Stage (Arrows Fully Separated Outside Cards Div)
+   ======================================================== */
+.apple-carousel-stage {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+  margin: 14px 0 24px;
+}
+
+.apple-nav-arrow {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: static;
+  transform: none;
+}
+
+.apple-nav-arrow:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #111827;
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+}
+
+.arrow-left,
+.arrow-right {
+  position: static;
+  left: auto;
+  right: auto;
+}
+
+.apple-reviews-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 4px 20px;
+}
+
+.apple-reviews-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.apple-reviews-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+}
+
+/* ========================================================
+   Review Card (Clean Apple Minimalist Card)
+   ======================================================== */
+.apple-review-card {
+  width: 380px;
+  max-width: 86vw;
+  background: #ffffff;
+  border: 1px solid #edf0f4;
+  border-radius: 22px;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.04);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.24s ease;
+  flex-shrink: 0;
+}
+
+.apple-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.1);
+  border-color: #e2e8f0;
+}
+
+/* Author Row: Colored Circle Initial Avatar */
+.card-author-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.card-letter-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.card-author-meta {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.card-author-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.card-time-ago {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+  display: block;
+}
+
+.card-g-icon {
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+/* Stars */
+.card-rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+
+.card-star {
+  color: #fbbc04;
+  font-size: 15px;
+}
+
+/* Content */
+.card-text-content {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #334155;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ========================================================
+   Pagination Dots
+   ======================================================== */
+.apple-pagination-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 46px;
+}
+
+.apple-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.apple-dot.is-active {
+  background: #111827;
+  width: 20px;
+  border-radius: 10px;
+}
+
+/* ========================================================
+   Bottom CTA & Signature
+   ======================================================== */
+.apple-reviews-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 10px;
+}
+
+/* Dark Capsule CTA Button */
+.apple-dark-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #1c2635; /* Apple dark obsidian */
+  color: #ffffff;
+  padding: 15px 32px;
+  border-radius: 999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px -4px rgba(17, 24, 39, 0.25);
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 26px;
+}
+
+.apple-dark-cta-btn:hover {
+  background: #111827;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(17, 24, 39, 0.35);
+}
+
+.apple-dark-cta-btn .cta-arrow {
+  transition: transform 0.2s ease;
+}
+
+.apple-dark-cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Bottom Verified Line Flanked by Hairlines */
+.apple-bottom-verified-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hairline-left,
+.hairline-right {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.verified-badge-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.verified-shield-icon {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Hand-drawn Signature Matching Reference Bottom-Left */
+.apple-handwritten-signature {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: rotate(-4deg);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.signature-text {
+  font-family: 'Caveat', 'Playfair Display', cursive, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.signature-brush-line {
+  width: 120px;
+  height: 10px;
+}
+
+/* ========================================================
+   Responsive
+   ======================================================== */
+@media (max-width: 1024px) {
+  .apple-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .apple-google-hero-card {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .apple-handwritten-signature {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .apple-google-section {
+    padding: 70px 0 85px;
+  }
+
+  .apple-google-container {
+    padding: 0 20px;
+  }
+
+  .apple-main-headline {
+    font-size: clamp(28px, 6.8vw, 38px);
+  }
+
+  .sub-br {
+    display: none;
+  }
+
+  .apple-google-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .hero-card-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .apple-review-card {
+    width: 300px;
+    padding: 22px 20px;
+  }
+
+  .apple-nav-arrow {
+    display: none;
+  }
+
+  .apple-dark-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .verified-badge-inline {
+    font-size: 11px;
+    padding: 0 8px;
+  }
+}

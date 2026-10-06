@@ -10,35 +10,35 @@ gsap.registerPlugin(ScrollTrigger)
 export const clinicStoryChapters = [
   {
     id: '01',
-    label: 'YAKLAŞIMIMIZ',
-    sublabel: 'Kişiye Özel Tedavi Anlayışı',
-    headline: 'Kişiye özel planlama,\ndoğal ve kalıcı sonuçlar.',
+    label: 'İLK MUAYENE',
+    sublabel: 'Röntgen ve Tedavi Planı',
+    headline: 'Röntgeniniz çekilir,\ntedavi sırası konuşulur.',
     description:
-      'Her hastamızın yüz harmonisi, ağız anatomisi ve beklentisi kendine özgüdür. Tedavilerimizi standart kalıplarla değil; biyolojik dokulara saygılı ve size özel bir hassasiyetle tasarlıyoruz.',
+      'Kliniğimize geldiğinizde önce detaylı ağız muayeneniz yapılır. Hangi dişin dolguya, kaplamaya ya da çekime ihtiyacı olduğu ekranda gösterilir; işlem sırası ve süresi sizinle netleştirilir.',
   },
   {
     id: '02',
-    label: 'DİJİTAL TEKNOLOJİ',
-    sublabel: '3D Ağız İçi Tarama & Hassasiyet',
-    headline: 'Milimetrik hassasiyet,\nhızlı ve konforlu süreç.',
+    label: '3D TARAMA',
+    sublabel: 'Ölçü Kaşığı Olmadan Tarama',
+    headline: 'Bulantı yapmayan\ndijital kamera ölçüsü.',
     description:
-      'Rahatsız edici geleneksel ölçü yöntemlerini geride bıraktık. 3D dijital tarayıcılar ve bilgisayar destekli kılavuzlarla hata payını sıfıra indiriyor, tedavi süresini belirgin şekilde kısaltıyoruz.',
+      'Ağzınıza macun doldurulan geleneksel ölçü kaşıklarını kullanmıyoruz. Küçük bir optik tarayıcıyla dişlerinizin 3 boyutlu modeli birkaç dakikada bilgisayara aktarılır.',
   },
   {
     id: '03',
-    label: 'KLİNİK KONFORU',
-    sublabel: 'Huzurlu & Şeffaf Bir Deneyim',
-    headline: 'Kaygıdan uzak,\ngüven veren sakin ortam.',
+    label: 'AĞRISIZ TEDAVİ',
+    sublabel: 'Korkusuz ve Sakin Süreç',
+    headline: 'İğne hissini azaltan\nhassas anestezi.',
     description:
-      'Sizi dikkatle dinliyor, tüm tedavi adımlarını şeffaflıkla paylaşıyoruz. Dinlendirici mimarimiz ve güler yüzlü ekibimizle, diş hekimi randevularını konforlu ve huzurlu bir deneyime dönüştürüyoruz.',
+      'Diş hekimi korkusu yaşayan hastalarımız için her adımı önceden anlatıyoruz. Anestezi tam etkisini göstermeden işleme başlamıyor, kendinizi hazır hissettiğiniz tempoda ilerliyoruz.',
   },
   {
     id: '04',
-    label: 'FONKSİYON & ESTETİK',
-    sublabel: 'Ömür Boyu Sağlıklı Çözümler',
-    headline: 'Hem sağlıklı fonksiyon,\nhem ışıltılı bir gülüş.',
+    label: 'KALICI SONUÇ',
+    sublabel: 'Çiğneme ve Konuşma Rahatlığı',
+    headline: 'Hem rahat çiğneme,\nhem doğal görünüm.',
     description:
-      'Yalnızca estetik bir görünümü değil; ideal çiğneme fonksiyonunu ve ömür boyu koruyabileceğiniz ağız sağlığını hedefliyoruz. Amacımız, kliniğimizden her an güvenle gülümseyerek ayrılmanız.',
+      'Yapılan kaplama ve dolguların sadece güzel görünmesini değil, yemek yerken kendi dişiniz gibi rahat hissettirmesini sağlıyoruz. Tedavi sonrası bakım önerileriyle diş sağlığınızı takip ediyoruz.',
   },
 ]
 
@@ -445,11 +445,11 @@ export default function AboutClinicStory() {
           <div className="mobile-about-header">
             <span className="mobile-about-eyebrow" data-reveal>HAKKIMIZDA</span>
             <h2 className="mobile-about-title" data-reveal data-reveal-delay="1">
-              Kişiye Özel Planlama,<br />
-              Doğal Sonuçlar.
+              Şeffaf Planlama,<br />
+              Sağlıklı Dişler.
             </h2>
             <p className="mobile-about-intro" data-reveal data-reveal-delay="2">
-              İleri dijital teknolojiler ve özenli hekimlik yaklaşımıyla, her gülüşü kendi doğal harmonisine kavuşturuyoruz.
+              Çankırı merkezdeki kliniğimizde, tedavinizin her adımını ilk muayeneden itibaren sizinle açıkça paylaşıyoruz.
             </p>
           </div>
 
