@@ -2,29 +2,29 @@ import DriftWall from './DriftWall'
 import './GallerySection.css'
 
 const items = [
-  { image: '/gallery/photo_one.png', title: 'Ferah Karşılama Alanı' },
-  { image: '/gallery/photo_three.png', title: 'Tedavi ve Muayene Ünitesi' },
-  { image: '/gallery/photo_two.png', title: '3D Ağız İçi Tarama' },
+  { image: '/gallery/photo_one.webp', title: 'Ferah Karşılama Alanı' },
+  { image: '/gallery/photo_three.webp', title: 'Tedavi ve Muayene Ünitesi' },
+  { image: '/gallery/photo_two.webp', title: '3D Ağız İçi Tarama' },
 
-  { image: '/gallery/photo_one.png', title: 'Zirkonyum ve Kaplama Uygulaması' },
-  { image: '/gallery/photo_three.png', title: 'Birebir Hekim Görüşmesi' },
-  { image: '/gallery/photo_two.png', title: 'Otoklav Sterilizasyon Ünitesi' },
+  { image: '/gallery/photo_one.webp', title: 'Zirkonyum ve Kaplama Uygulaması' },
+  { image: '/gallery/photo_three.webp', title: 'Birebir Hekim Görüşmesi' },
+  { image: '/gallery/photo_two.webp', title: 'Otoklav Sterilizasyon Ünitesi' },
 
-  { image: '/gallery/photo_three.png', title: 'İmplant ve Cerrahi Odası' },
-  { image: '/gallery/photo_one.png', title: 'Bekleme ve Dinlenme Salonu' },
-  { image: '/gallery/photo_two.png', title: 'Tedavi Öncesi Dijital Planlama' },
+  { image: '/gallery/photo_three.webp', title: 'İmplant ve Cerrahi Odası' },
+  { image: '/gallery/photo_one.webp', title: 'Bekleme ve Dinlenme Salonu' },
+  { image: '/gallery/photo_two.webp', title: 'Tedavi Öncesi Dijital Planlama' },
 
-  { image: '/gallery/photo_two.png', title: 'Dijital Röntgen & Görüntüleme' },
-  { image: '/gallery/photo_three.png', title: 'Hasta Dinlenme Alanı' },
-  { image: '/gallery/photo_one.png', title: 'Dijital Görüntüleme Cihazları' },
+  { image: '/gallery/photo_two.webp', title: 'Dijital Röntgen & Görüntüleme' },
+  { image: '/gallery/photo_three.webp', title: 'Hasta Dinlenme Alanı' },
+  { image: '/gallery/photo_one.webp', title: 'Dijital Görüntüleme Cihazları' },
 
-  { image: '/gallery/photo_one.png', title: 'Danışma ve Randevu Alanı' },
-  { image: '/gallery/photo_three.png', title: 'Tedavi ve Muayene Koltuğu' },
-  { image: '/gallery/photo_two.png', title: 'Dijital Röntgen & Görüntüleme' },
+  { image: '/gallery/photo_one.webp', title: 'Danışma ve Karşılama Alanı' },
+  { image: '/gallery/photo_three.webp', title: 'Tedavi ve Muayene Koltuğu' },
+  { image: '/gallery/photo_two.webp', title: 'Dijital Röntgen & Görüntüleme' },
 
-  { image: '/gallery/photo_two.png', title: 'Zirkonyum Kaplama Hazırlığı' },
-  { image: '/gallery/photo_three.png', title: 'Şeffaf Tedavi Planlaması' },
-  { image: '/gallery/photo_one.png', title: 'Otoklav Sterilizasyon Ünitesi' },
+  { image: '/gallery/photo_two.webp', title: 'Zirkonyum Kaplama Hazırlığı' },
+  { image: '/gallery/photo_three.webp', title: 'Şeffaf Tedavi Planlaması' },
+  { image: '/gallery/photo_one.webp', title: 'Otoklav Sterilizasyon Ünitesi' },
 ];
 
 export default function GallerySection() {

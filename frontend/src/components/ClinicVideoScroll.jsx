@@ -2,24 +2,22 @@ import { useEffect, useRef, useState } from 'react'
 import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import './ClinicVideoScroll.css'
 
-const smilePhrases = [
-  {
-    before: 'Her ',
-    highlight: 'gülüş',
-    after: ' kendi hikayesini yazar.',
-  },
-  {
-    before: '',
-    highlight: 'Gülüşünüz',
-    after: ', en değerli imzanız.',
-  },
-]
+const LINE_1_FULL = 'Her gülüş, yeni bir başlangıç.'
+const LINE_2_PREFIX = 'Gülüşünüz, '
+const LINE_2_HIGHLIGHT = 'en değerli imzanız.'
+const LINE_2_FULL = LINE_2_PREFIX + LINE_2_HIGHLIGHT
 
 export default function ClinicVideoScroll() {
   const sectionRef = useRef(null)
   const frameRef = useRef(null)
   const viewportRef = useRef(null)
   const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Calmer typewriter character state
+  const [typedChars1, setTypedChars1] = useState(0)
+  const [typedChars2, setTypedChars2] = useState(0)
+  const chars1Ref = useRef(0)
+  const chars2Ref = useRef(0)
 
   // Seamless Dual-Video Looper to eliminate black frames & jump-cuts
   const video1Ref = useRef(null)
@@ -50,7 +48,7 @@ export default function ClinicVideoScroll() {
 
         // Diğer videoyu baştan pürüzsüzce başlat
         nextVideo.currentTime = 0.05
-        nextVideo.play().catch(() => {})
+        nextVideo.play().catch(() => { })
 
         // Aktif katmanı değiştirerek CSS crossfade tetikle
         setActiveSlot(activeSlot === 1 ? 2 : 1)
@@ -86,47 +84,78 @@ export default function ClinicVideoScroll() {
       const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1)
       targetProgress = progress
 
-      // Expand to 100% full bleed on desktop when reaching/on the video section
-      if (rect.top > 180) {
+      // İlk başta paddingli kart olarak başlar, scrolle geldikçe (ilk %14'lük dilimde) tam ekrana genişler
+      if (rect.top > 0) {
         targetExpand = 0
-      } else if (rect.top > 0) {
-        targetExpand = Math.min(Math.max((180 - rect.top) / 180, 0), 1)
       } else {
-        if (progress < 0.94) {
-          targetExpand = 1
-        } else {
-          targetExpand = Math.max(0, (1 - progress) / 0.06)
-        }
+        // Scrolle başlayınca pürüzsüzce %100 tam ekranı kaplayacak şekilde expand 1'e ulaşır
+        targetExpand = Math.min(progress / 0.14, 1)
       }
     }
 
     const updateLoop = () => {
       // Gentle, luxurious lerp for calm, premium pacing
-      currentProgress += (targetProgress - currentProgress) * 0.12
-      currentExpand += (targetExpand - currentExpand) * 0.14
+      currentProgress += (targetProgress - currentProgress) * 0.075
+      currentExpand += (targetExpand - currentExpand) * 0.12
 
       setScrollProgress(currentProgress)
 
-      // Direct high-performance DOM manipulation for full-screen expansion on desktop
+      // Typewriter calculations:
+      // Phase 1 (0.00 - 0.06): Section entry & card expansion
+      // Phase 2 (0.06 - 0.38): Line 1 types calmly
+      // Phase 3 (0.38 - 0.52): Extended pause so user can comfortably read Line 1
+      // Phase 4 (0.52 - 0.86): Line 2 types calmly
+      // Phase 5 (0.86 - 0.94): Long rest with both lines displayed
+      // Phase 6 (0.94 - 1.00): Smooth exit
+      const isEntered = currentProgress > 0.02
+      const p1 = Math.min(Math.max((currentProgress - 0.06) / 0.32, 0), 1)
+      const target1 = isEntered ? Math.round(p1 * LINE_1_FULL.length) : 0
+
+      const p2 = Math.min(Math.max((currentProgress - 0.52) / 0.34, 0), 1)
+      const target2 = isEntered && currentProgress >= 0.52 ? Math.round(p2 * LINE_2_FULL.length) : 0
+
+      // Smooth rate limiting: at most 0.45 char per frame (calm, natural typing speed)
+      const MAX_CHAR_SPEED = 0.45
+      const diff1 = target1 - chars1Ref.current
+      if (Math.abs(diff1) <= MAX_CHAR_SPEED) {
+        chars1Ref.current = target1
+      } else {
+        chars1Ref.current += Math.sign(diff1) * MAX_CHAR_SPEED
+      }
+
+      const diff2 = target2 - chars2Ref.current
+      if (Math.abs(diff2) <= MAX_CHAR_SPEED) {
+        chars2Ref.current = target2
+      } else {
+        chars2Ref.current += Math.sign(diff2) * MAX_CHAR_SPEED
+      }
+
+      setTypedChars1(Math.round(chars1Ref.current))
+      setTypedChars2(Math.round(chars2Ref.current))
+
       if (frameRef.current && viewportRef.current) {
         const mobile = isMobile()
+        const initialPadY = mobile ? 16 : 24
+        const initialPadX = mobile ? 12 : 36
+        const initialRadius = mobile ? 22 : 28
 
-        if (mobile) {
-          // On mobile: preserve the elegant curved cinema card aspect ratio from CSS
-          frameRef.current.style.padding = ''
-          viewportRef.current.style.borderRadius = ''
-          viewportRef.current.style.boxShadow = ''
-          viewportRef.current.style.border = ''
+        // Scrolle gelince padding ve border-radius 0'a iner, tüm ekranı kaplar
+        const padFactor = Math.max(0, 1 - currentExpand)
+
+        if (padFactor <= 0.005) {
+          frameRef.current.style.padding = '0px'
+          viewportRef.current.style.borderRadius = '0px'
+          viewportRef.current.style.boxShadow = 'none'
         } else {
-          // On desktop: keep generous padding so video stays framed with breathing room
-          const padY = Math.max(18, (1 - currentExpand) * 16 + 18)
-          const padX = Math.max(32, (1 - currentExpand) * 24 + 32)
-          const radius = Math.max(28, (1 - currentExpand) * 12 + 28)
+          const padY = (padFactor * initialPadY).toFixed(1)
+          const padX = (padFactor * initialPadX).toFixed(1)
+          const radius = (padFactor * initialRadius).toFixed(1)
 
-          frameRef.current.style.padding = `${padY.toFixed(1)}px ${padX.toFixed(1)}px`
-          viewportRef.current.style.borderRadius = `${radius.toFixed(1)}px`
-          viewportRef.current.style.boxShadow = '0 25px 65px -15px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08)'
-          viewportRef.current.style.border = 'none'
+          frameRef.current.style.padding = `${padY}px ${padX}px`
+          viewportRef.current.style.borderRadius = `${radius}px`
+
+          const shadowAlpha = (padFactor * 0.22).toFixed(3)
+          viewportRef.current.style.boxShadow = `0 20px 50px -12px rgba(15, 23, 42, ${shadowAlpha}), 0 0 0 1px rgba(0, 0, 0, ${(padFactor * 0.08).toFixed(3)})`
         }
       }
 
@@ -145,46 +174,21 @@ export default function ClinicVideoScroll() {
     }
   }, [])
 
-  // Word-by-word scroll animation helper (gentle, clear pacing)
-  const getWordStyle = (start, duration = 0.055) => {
-    if (scrollProgress < start) {
-      return {
-        opacity: 0,
-        transform: 'translate3d(0, 18px, 0)',
-      }
-    }
-    const t = Math.min(Math.max((scrollProgress - start) / duration, 0), 1)
-    const ease = 1 - Math.pow(1 - t, 3)
-    const y = (1 - ease) * 18
-    return {
-      opacity: ease,
-      transform: `translate3d(0, ${y.toFixed(2)}px, 0)`,
-    }
-  }
-
-  // Both lines stay locked on screen, only gently exiting at the very end (0.94+)
+  // Exit transition at the very end of the scroll track (0.94+)
   let exitY = 0
   let exitOpacity = 1
   if (scrollProgress > 0.94) {
-    const tExit = Math.min(Math.max((scrollProgress - 0.94) / 0.055, 0), 1)
+    const tExit = Math.min(Math.max((scrollProgress - 0.94) / 0.05, 0), 1)
     exitY = -tExit * 28
     exitOpacity = Math.max(0, 1 - tExit)
   }
 
-  const line1Words = [
-    { text: 'Her' },
-    { text: 'gülüş,' },
-    { text: 'yeni' },
-    { text: 'bir' },
-    { text: 'başlangıç.' },
-  ]
+  const isEntered = scrollProgress > 0.02
 
-  const line2Words = [
-    { text: 'Gülüşünüz,' },
-    { text: 'en', isGradient: true },
-    { text: 'değerli', isGradient: true },
-    { text: 'imzanız.', isGradient: true },
-  ]
+  // Cursor is on Line 1 during Line 1 typing and pause (scrollProgress < 0.52)
+  // Cursor moves to Line 2 starting at 0.52
+  const showCursorLine1 = isEntered && scrollProgress < 0.52
+  const showCursorLine2 = isEntered && scrollProgress >= 0.52
 
   return (
     <section className="clinic-video-scroll-track" ref={sectionRef} id="clinic-video">
@@ -247,7 +251,7 @@ export default function ClinicVideoScroll() {
             </div>
           </div>
 
-          {/* 2-Line Editorial Typography - Revealed Word by Word on Scroll */}
+          {/* 2-Line Editorial Typography - Typewriter "Mesaj Yazıyor" Effect on Scroll */}
           <div
             className="video-scroll-center-content"
             style={{
@@ -258,38 +262,34 @@ export default function ClinicVideoScroll() {
             <div className="reference-headline-block">
               {/* Line 1: Her gülüş, yeni bir başlangıç. */}
               <h2 className="reference-line reference-line-1">
-                {line1Words.map((word, idx) => {
-                  const start = 0.08 + idx * 0.05
-                  const style = getWordStyle(start, 0.06)
-                  return (
-                    <span
-                      key={idx}
-                      className={`scroll-word ${word.isGradient ? 'gulus-gradient-word' : ''}`}
-                      style={style}
-                    >
-                      {word.text}
-                      {idx < line1Words.length - 1 ? ' ' : ''}
-                    </span>
-                  )
-                })}
+                {typedChars1 === 0 && !showCursorLine1 ? (
+                  <span className="typewriter-ghost" aria-hidden="true">&nbsp;</span>
+                ) : (
+                  <>
+                    <span>{LINE_1_FULL.slice(0, typedChars1)}</span>
+                    {showCursorLine1 && (
+                      <span className="typewriter-cursor" aria-hidden="true">
+                        |
+                      </span>
+                    )}
+                  </>
+                )}
               </h2>
 
               {/* Line 2: Gülüşünüz, en değerli imzanız. */}
               <h2 className="reference-line reference-line-2">
-                {line2Words.map((word, idx) => {
-                  const start = 0.48 + idx * 0.065
-                  const style = getWordStyle(start, 0.06)
-                  return (
-                    <span
-                      key={idx}
-                      className={`scroll-word ${word.isGradient ? 'gulus-gradient-word' : ''}`}
-                      style={style}
-                    >
-                      {word.text}
-                      {idx < line2Words.length - 1 ? ' ' : ''}
-                    </span>
-                  )
-                })}
+                {typedChars2 === 0 && !showCursorLine2 ? (
+                  <span className="typewriter-ghost" aria-hidden="true">&nbsp;</span>
+                ) : (
+                  <>
+                    <span>{LINE_2_FULL.slice(0, typedChars2)}</span>
+                    {showCursorLine2 && (
+                      <span className="typewriter-cursor" aria-hidden="true">
+                        |
+                      </span>
+                    )}
+                  </>
+                )}
               </h2>
             </div>
           </div>

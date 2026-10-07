@@ -1,7 +1,7 @@
 import SplitText from './SplitText'
 import './Hero.css'
 
-export default function Hero({ onBookConsultation, onWatchStory }) {
+export default function Hero({ onWatchStory }) {
   const topSlats = [
     'İleri Diş Hekimliği',
     'Yüksek Kalite Ekipman & 3D Tarama',
@@ -13,7 +13,7 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
       {/* Tek ve Ana Hero Görseli: En arkada yer alır (z-index: 1) */}
       <div className="dental-hero-bg-layer" aria-hidden="true">
         <img
-          src="/home/hero.png"
+          src="/home/hero.webp"
           alt="Mert Çıtak Diş Kliniği Estetik Gülüş"
           className="dental-bg-full-img"
         />
@@ -25,20 +25,62 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
         <div className="dental-hero-slats-wrap" role="list">
           <div className="dental-slat-gap-cover top-cover" aria-hidden="true" />
 
-          <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">Tedavi Öncesi Dijital Gülüş Planı</span>
+          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="1">
+            <SplitText
+              tag="span"
+              className="dental-slat-label"
+              text="Tedavi Öncesi Dijital Gülüş Planı"
+              textAlign="center"
+              delay={22}
+              duration={0.85}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 16 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.05}
+              rootMargin="0px"
+              play={true}
+            />
           </div>
 
           <div className="dental-slat-gap-cover" aria-hidden="true" />
 
-          <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">Ölçü Kaşığı Olmadan 3D Ağız Taraması</span>
+          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="2">
+            <SplitText
+              tag="span"
+              className="dental-slat-label"
+              text="Ölçü Kaşığı Olmadan 3D Ağız Taraması"
+              textAlign="center"
+              delay={22}
+              duration={0.85}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 16 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.05}
+              rootMargin="0px"
+              play={true}
+            />
           </div>
 
           <div className="dental-slat-gap-cover" aria-hidden="true" />
 
-          <div className="dental-hero-slat" role="listitem">
-            <span className="dental-slat-label">Ağrısız Anestezi ve Birebir Hekim İlgisi</span>
+          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="3">
+            <SplitText
+              tag="span"
+              className="dental-slat-label"
+              text="Ağrısız Anestezi ve Birebir Hekim İlgisi"
+              textAlign="center"
+              delay={22}
+              duration={0.85}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 16 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.05}
+              rootMargin="0px"
+              play={true}
+            />
           </div>
 
           <div className="dental-slat-gap-cover bottom-cover" aria-hidden="true" />
@@ -101,6 +143,23 @@ export default function Hero({ onBookConsultation, onWatchStory }) {
                 play={true}
               />
 
+            </div>
+
+            {/* Mobilde sağ görsel kaldırıldığında buton sol kart içinde gösterilir */}
+            <div className="dental-mobile-actions">
+              <button
+                type="button"
+                className="btn-dental-watch-story"
+                onClick={onWatchStory}
+                id="hero-mobile-video-btn"
+              >
+                <span className="dental-play-circle" aria-hidden="true">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                </span>
+                <span>Kliniğimizi Keşfedin</span>
+              </button>
             </div>
           </div>
 

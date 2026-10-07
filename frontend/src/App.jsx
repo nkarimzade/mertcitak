@@ -9,13 +9,11 @@ import GoogleReviews from './components/GoogleReviews'
 import GallerySection from './components/GallerySection'
 import ContactSection from './components/ContactSection'
 import StoryModal from './components/StoryModal'
-import BookingModal from './components/BookingModal'
 import { initScrollReveal } from './utils/scrollReveal'
 
 function App() {
   const [isStoryOpen, setIsStoryOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isBookingOpen, setIsBookingOpen] = useState(false)
 
   useEffect(() => {
     const cleanup = initScrollReveal()
@@ -31,10 +29,12 @@ function App() {
       <Header
         menuOpen={isMenuOpen}
         setMenuOpen={setIsMenuOpen}
-        onContactClick={() => setIsBookingOpen(true)}
+        onContactClick={() => {
+          const el = document.querySelector('#contact')
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }}
       />
       <Hero
-        onBookConsultation={() => setIsBookingOpen(true)}
         onWatchStory={() => setIsStoryOpen(true)}
       />
       <ClinicVideoScroll />
@@ -46,10 +46,6 @@ function App() {
       <StoryModal
         isOpen={isStoryOpen}
         onClose={() => setIsStoryOpen(false)}
-      />
-      <BookingModal
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
       />
     </div>
   )

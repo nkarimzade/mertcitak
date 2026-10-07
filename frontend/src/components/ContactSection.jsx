@@ -118,14 +118,14 @@ export default function ContactSection() {
                 <div className="untitled-success-badge">
                   <FiCheckCircle size={38} />
                 </div>
-                <h3 className="untitled-success-title">Randevu Talebiniz Alındı!</h3>
+                <h3 className="untitled-success-title">Mesajınız İletildi!</h3>
                 <p className="untitled-success-desc">
-                  Teşekkürler Sayın <strong>{formData.firstName} {formData.lastName}</strong>. Uzman ekibimiz{' '}
+                  Teşekkürler Sayın <strong>{formData.firstName} {formData.lastName}</strong>. Ekibimiz{' '}
                   <strong>{formData.phone}</strong> numaranızdan sizinle en kısa sürede iletişime geçecektir.
                 </p>
                 <div className="untitled-success-btns">
                   <a
-                    href="https://wa.me/905452011918?text=Merhaba,%20kliniğinizden%20randevu%20talebinde%20bulundum."
+                    href="https://wa.me/905452011918?text=Merhaba,%20kliniğiniz%20hakkında%20bilgi%20almak%20istiyorum."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="untitled-wa-direct-btn"
@@ -133,7 +133,7 @@ export default function ContactSection() {
                     <FaWhatsapp size={18} /> WhatsApp ile Hemen Yazın
                   </a>
                   <button type="button" onClick={handleReset} className="untitled-reset-btn">
-                    Yeni Talep Oluştur
+                    Yeni Mesaj Gönder
                   </button>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function ContactSection() {
                   disabled={isSubmitting}
                   className="untitled-submit-btn"
                 >
-                  {isSubmitting ? 'Gönderiliyor...' : 'Randevu Talebi Oluştur'}
+                  {isSubmitting ? 'Gönderiliyor...' : 'Mesajı Gönder'}
                 </button>
 
                 {/* Foot Direct Contact Note */}
@@ -276,7 +276,7 @@ export default function ContactSection() {
             <div className="untitled-photo-frame">
               {/* High-Resolution Clinic Lifestyle Showcase Image */}
               <img
-                src="/contact_showcase.jpg"
+                src="/contact_showcase.webp"
                 alt="Dt. Mert Çıtak Klinik ve Hasta Görüşmesi"
                 className="untitled-showcase-img"
               />
