@@ -63,33 +63,96 @@
 
 @media (max-width: 768px) {
   .dental-hero {
-    padding: 10px 12px 28px;
+    padding: 10px 12px 24px;
   }
 
   .hero-slider-container {
     border-radius: 18px;
-    min-height: 540px;
+    aspect-ratio: auto;
+    min-height: clamp(500px, 72svh, 620px);
     max-height: none;
   }
-  .hero-copy { left: 28px; right: 28px; width: auto; max-width: 440px; }
+
+  .hero-copy {
+    inset: 0;
+    width: auto;
+    max-width: none;
+    padding: clamp(28px, 8vw, 48px) clamp(22px, 7vw, 40px) 78px;
+    justify-content: center;
+  }
+
+  .hero-copy h1 {
+    max-width: 9ch;
+    font-size: clamp(38px, 8vw, 46px);
+    line-height: 1.08;
+  }
+
+  .hero-copy > p {
+    max-width: 34ch;
+  }
+
+  .hero-actions {
+    width: min(100%, 320px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    min-height: 46px;
+    justify-content: space-between;
+  }
+
+  .hero-slider-container .simple-slider-image {
+    object-position: 62% center;
+  }
+
   .hero-slider-container .simple-slider::after { background: linear-gradient(90deg, rgb(255 255 255 / 96%), rgb(255 255 255 / 82%) 58%, rgb(255 255 255 / 42%)); }
 }
 
 @media (max-width: 480px) {
+  .dental-hero {
+    padding-inline: 8px;
+  }
+
   .hero-slider-container {
     border-radius: 14px;
-    min-height: 580px;
+    min-height: clamp(480px, 70svh, 560px);
   }
-  .hero-copy { left: 22px; right: 22px; }
-  .hero-copy h1 { font-size: 40px; }
+
+  .hero-copy {
+    padding: 26px 18px 70px;
+  }
+
+  .hero-copy h1 { font-size: clamp(32px, 10vw, 40px); }
   .hero-copy > p { font-size: 16px; }
-  .hero-location { font-size: 12px; }
+  .hero-location {
+    max-width: 100%;
+    font-size: 12px;
+    line-height: 1.4;
+  }
   .hero-actions { gap: 12px; }
-  .hero-slider-container .simple-slider-controls { right: 20px; }
+  .hero-slider-container .simple-slider-controls { right: 14px; bottom: 16px; }
   .hero-slider-container .simple-slider-dots { left: 22px; transform: none; }
 }
 @media (max-width: 360px) {
-  .hero-copy h1 { font-size: 34px; }
+  .hero-copy {
+    padding-inline: 16px;
+  }
+
+  .hero-copy h1 { font-size: 31px; }
+
+  .hero-copy > p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .hero-actions a {
+    padding-inline: 14px;
+    font-size: 14px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-copy { animation: none; }
