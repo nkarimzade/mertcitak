@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { FaStar, FaChevronLeft, FaChevronRight, FaArrowRight } from 'react-icons/fa6'
 import { FiShield } from 'react-icons/fi'
 import './GoogleReviews.css'
+import TextReveal from './TextReveal'
 
 // Official Google G Mark SVG
 const GoogleGIcon = ({ size = 20 }) => (
@@ -150,7 +151,7 @@ export default function GoogleReviews() {
     <section className="apple-google-section" id="reviews">
       <div className="apple-google-container">
         {/* Top Header Row Matching Reference Layout */}
-        <div className="apple-header-row" data-reveal>
+        <div className="apple-header-row">
           {/* Left Column: Eyebrow + Large Title + Subtitle */}
           <div className="apple-header-left">
             <div className="apple-eyebrow">
@@ -158,14 +159,14 @@ export default function GoogleReviews() {
               <span className="eyebrow-text">HASTALARIMIZ NE DİYOR?</span>
             </div>
 
-            <h2 className="apple-main-headline">
+            <TextReveal className="apple-main-headline">
               <span className="headline-bold">Google’da</span>
               <br />
               <span className="headline-muted">bizi nasıl </span>
               <span className="headline-bold">değerlendiriyorlar?</span>
-            </h2>
+            </TextReveal>
 
-            <p className="apple-subtitle-text">
+            <p className="apple-subtitle-text" data-reveal data-reveal-delay="2">
               Kliniğimizde tedavi gören hastalarımızın Google Haritalar profilimize bıraktığı bağımsız deneyimler.
             </p>
           </div>

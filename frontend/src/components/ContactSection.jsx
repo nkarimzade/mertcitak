@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa6'
 import './ContactSection.css'
+import TextReveal from './TextReveal'
 
 const serviceOptions = [
   { id: 'implant', label: 'İmplant Tedavisi' },
@@ -109,9 +110,9 @@ export default function ContactSection() {
             </div>
 
             {/* Main Headline */}
-            <h2 className="untitled-form-title">
+            <TextReveal className="untitled-form-title">
               Hayalinizdeki estetik ve sağlıklı gülüş için ilk adımı atın
-            </h2>
+            </TextReveal>
 
             {isSubmitted ? (
               <div className="untitled-success-state">
@@ -287,7 +288,7 @@ export default function ContactSection() {
               {/* Bottom Editorial Content */}
               <div className="untitled-photo-bottom-content">
                 {/* Italic Serif Editorial Tagline */}
-                <p className="untitled-editorial-quote">
+                <p className="untitled-editorial-quote" data-reveal data-reveal-delay="2">
                   Sağlıklı, doğal ve özgüven dolu bir gülüş için buradayız.
                 </p>
 
@@ -318,19 +319,6 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Minimal Footer */}
-        <div className="untitled-bottom-footer">
-          <span>© {new Date().getFullYear()} Dt. Mert Çıtak Diş Kliniği. Tüm hakları saklıdır.</span>
-          <div className="footer-links-row">
-            <a href="tel:+905452011918">0545 201 19 18</a>
-            <span>•</span>
-            <a href="https://wa.me/905452011918" target="_blank" rel="noopener noreferrer">
-              WhatsApp
-            </a>
-            <span>•</span>
-            <a href="#about">Hakkımızda</a>
-          </div>
-        </div>
       </div>
     </section>
   )

@@ -528,37 +528,6 @@
 }
 
 /* ========================================================
-   BOTTOM FOOTER LINE
-   ======================================================== */
-.untitled-bottom-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 12px 10px;
-  font-size: 13px;
-  color: #94a3b8;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.footer-links-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-links-row a {
-  color: #64748b;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.footer-links-row a:hover {
-  color: #0f172a;
-}
-
-/* ========================================================
    RESPONSIVE QUERIES
    ======================================================== */
 @media (max-width: 1024px) {
@@ -619,9 +588,4 @@
     right: 18px;
   }
 
-  .untitled-bottom-footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
 }

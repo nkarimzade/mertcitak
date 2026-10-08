@@ -1,146 +1,162 @@
 import { useState, useEffect, useRef } from 'react'
-import { Sling as Hamburger } from 'hamburger-react'
+import { createPortal } from 'react-dom'
+import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi'
 import './Header.css'
 
-export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: controlledSetMenuOpen, onContactClick }) {
+const navItems = [
+  { label: 'Ana Sayfa', href: '#home' },
+  { label: 'Tedavilerimiz', href: '#treatments' },
+  { label: 'Kliniğimiz', href: '#clinic-video' },
+  { label: 'Hakkımızda', href: '#about' },
+  { label: 'Ekibimiz', href: '#team' },
+  { label: 'Yorumlar', href: '#reviews' },
+  { label: 'Galeri', href: '#gallery' },
+  { label: 'İletişim', href: '#contact' },
+]
+
+export default function Header({ menuOpen: controlledMenuOpen, setMenuOpen: controlledSetMenuOpen, onContactClick, homePath = '' }) {
   const [internalMenuOpen, setInternalMenuOpen] = useState(false)
-  const isMenuControlled = controlledMenuOpen !== undefined
-  const menuOpen = isMenuControlled ? controlledMenuOpen : internalMenuOpen
-  const setMenuOpen = isMenuControlled ? controlledSetMenuOpen : setInternalMenuOpen
+  const menuOpen = controlledMenuOpen ?? internalMenuOpen
+  const setMenuOpen = controlledMenuOpen !== undefined ? controlledSetMenuOpen : setInternalMenuOpen
+  const [activeNav, setActiveNav] = useState('#home')
+  const [isVideoHidden, setIsVideoHidden] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const headerRef = useRef(null)
+  const toggleRef = useRef(null)
+  const sheetRef = useRef(null)
 
-  const [activeNav, setActiveNav] = useState('Ana Sayfa')
-  const menuRef = useRef(null)
-
-  // Close menu on click outside or Escape key
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false)
-      }
+    const videoSection = document.getElementById('clinic-video')
+    let frameId = null
+    const updateVisibility = () => {
+      frameId = null
+      setIsScrolled(window.scrollY > 160)
+      const rect = videoSection?.getBoundingClientRect()
+      const headerHeight = (headerRef.current?.offsetHeight ?? 0) + (headerRef.current?.offsetTop ?? 0)
+      setIsVideoHidden(Boolean(rect && rect.top <= headerHeight && rect.bottom > 0))
     }
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && menuOpen) {
-        setMenuOpen(false)
-      }
+    const scheduleUpdate = () => {
+      if (frameId === null) frameId = window.requestAnimationFrame(updateVisibility)
     }
-    if (menuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      window.addEventListener('keydown', handleKeyDown)
-    }
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+    updateVisibility()
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
+      if (frameId !== null) window.cancelAnimationFrame(frameId)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isVideoHidden) return
+    setMenuOpen(false)
+    if (headerRef.current?.contains(document.activeElement)) document.activeElement.blur()
+  }, [isVideoHidden, setMenuOpen])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const header = headerRef.current
+    const toggle = toggleRef.current
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    sheetRef.current?.querySelector('button')?.focus()
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        toggleRef.current?.focus()
+      }
+      if (event.key === 'Tab') {
+        const controls = sheetRef.current?.querySelectorAll('button, a[href]')
+        if (!controls?.length) return
+        const first = controls[0]
+        const last = controls[controls.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    const desktopQuery = window.matchMedia('(min-width: 1201px)')
+    const handleDesktop = (event) => { if (event.matches) setMenuOpen(false) }
+    document.addEventListener('keydown', handleEscape)
+    desktopQuery.addEventListener('change', handleDesktop)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      if (!header?.hasAttribute('aria-hidden')) toggle?.focus()
+      document.removeEventListener('keydown', handleEscape)
+      desktopQuery.removeEventListener('change', handleDesktop)
     }
   }, [menuOpen, setMenuOpen])
 
-  const navItems = [
-    { label: 'Ana Sayfa', href: '#home' },
-    { label: 'Kliniğimiz', href: '#clinic-video' },
-    { label: 'Hakkımızda', href: '#about' },
-    { label: 'Ekibimiz', href: '#team' },
-    { label: 'Yorumlar', href: '#reviews' },
-    { label: 'Galeri', href: '#gallery' },
-    { label: 'İletişim', href: '#contact' },
-  ]
-
-  const handleNavClick = (label, href) => {
-    setActiveNav(label)
+  const handleNavigate = (event, href) => {
+    if (homePath) return
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    setActiveNav(href)
     setMenuOpen(false)
-    const target = document.querySelector(href)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  const handleContactBtnClick = () => {
-    setMenuOpen(false)
-    if (onContactClick) {
+    if (href === '#contact' && onContactClick) {
       onContactClick()
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
     }
+    if (menuOpen) toggleRef.current?.focus()
   }
 
   return (
-    <header className="site-header">
-      {/* Left: Minimalist Menu Trigger & Compact Floating Dropdown */}
-      <div className="header-left" ref={menuRef}>
-        <button
-          type="button"
-          className="header-nav-btn menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Menüyü Kapat' : 'Menüyü Aç'}
-          aria-expanded={menuOpen}
-        >
-          <div className="react-hamburger-box">
-            <Hamburger
-              toggled={menuOpen}
-              size={18}
-              color="#111827"
-              duration={0.3}
-              rounded
-            />
-          </div>
-          <span className="nav-btn-text">MENÜ</span>
+    <div className="header-shell">
+    <header className={`site-header${isScrolled ? ' is-scrolled' : ''}${isVideoHidden ? ' is-video-hidden' : ''}`} ref={headerRef}
+      aria-hidden={isVideoHidden || undefined} inert={isVideoHidden}>
+      <div className="header-inner">
+        <a className="header-brand" href={`${homePath}#home`} onClick={(event) => handleNavigate(event, '#home')} aria-label="Dt. Mert Çıtak Diş Kliniği, ana sayfa">
+          <img className="header-brand-logo" src="/logo.png" alt="" width="76" height="76" />
+          <span className="header-brand-copy">
+            <span className="header-brand-name">Dt. Mert Çıtak</span>
+            <span className="header-brand-caption">Diş Kliniği</span>
+          </span>
+        </a>
+        <button ref={toggleRef} type="button" className="header-menu-toggle" aria-expanded={menuOpen}
+          aria-controls="mobile-navigation" aria-label={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+          title={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'} onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
         </button>
-
-        {/* Compact Floating White Dropdown Menu (Screen Not Covered) */}
-        <div className={`compact-menu-dropdown ${menuOpen ? 'is-open' : ''}`}>
-          <nav className="compact-nav-list">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`compact-nav-link ${activeNav === item.label ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(item.label, item.href)
-                }}
-              >
-                <span className="compact-link-label">{item.label}</span>
+        <nav id="header-navigation" className="header-navigation" aria-label="Ana menü">
+          {navItems.map((item) => (
+            <a key={item.href} href={`${homePath}${item.href}`}
+              className={`header-link${activeNav === item.href ? ' is-active' : ''}${item.href === '#contact' ? ' header-contact-link' : ''}`}
+              aria-current={activeNav === item.href ? 'location' : undefined}
+              onClick={(event) => handleNavigate(event, item.href)}>
+              {item.label}
+              {item.href === '#contact' && <FiArrowUpRight aria-hidden="true" />}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    {createPortal(
+      <div className={`mobile-menu-layer${menuOpen ? ' is-open' : ''}`} inert={!menuOpen} aria-hidden={!menuOpen}>
+        <div className="mobile-menu-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />
+        <div className="mobile-menu-sheet" ref={sheetRef} role="dialog" aria-modal={menuOpen || undefined} aria-labelledby="mobile-menu-title">
+          <div className="mobile-menu-handle" aria-hidden="true" />
+          <div className="mobile-menu-heading">
+            <div><span className="mobile-menu-clinic">Dt. Mert Çıtak Diş Kliniği</span><h2 id="mobile-menu-title">Menü</h2></div>
+            <button type="button" className="mobile-menu-close" aria-label="Menüyü kapat" title="Menüyü kapat" onClick={() => setMenuOpen(false)}><FiX aria-hidden="true" /></button>
+          </div>
+          <nav id="mobile-navigation" aria-label="Mobil ana menü">
+            {navItems.map((item, index) => (
+              <a key={item.href} href={`${homePath}${item.href}`} className={`mobile-menu-link${activeNav === item.href ? ' is-active' : ''}`}
+                style={{ '--menu-delay': `${index * 30}ms` }} aria-current={activeNav === item.href ? 'location' : undefined}
+                onClick={(event) => handleNavigate(event, item.href)}>
+                {item.label}<FiArrowUpRight aria-hidden="true" />
               </a>
             ))}
           </nav>
-
-          <div className="compact-menu-footer">
-            <a href="tel:+905452011918" className="compact-phone-link">
-              0545 201 19 18
-            </a>
-            <span className="compact-meta-dot">•</span>
-            <span className="compact-loc-text">İkizler İş Merkezi, Çankırı</span>
-          </div>
         </div>
-      </div>
-
-      {/* Center: Brand Logo */}
-      <div className="header-center">
-        <a href="#home" className="header-logo">
-          <span className="logo-name">MERT ÇITAK</span>
-          <span className="logo-tagline">DİŞ KLİNİĞİ</span>
-        </a>
-      </div>
-
-      {/* Right: Contact Trigger */}
-      <div className="header-right">
-        <button
-          type="button"
-          className="header-nav-btn contact-btn"
-          onClick={handleContactBtnClick}
-          aria-label="İletişim"
-        >
-          <span className="nav-btn-text">İLETİŞİM</span>
-          <svg
-            className="contact-envelope-icon"
-            width="18"
-            height="14"
-            viewBox="0 0 18 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect x="0.75" y="0.75" width="16.5" height="12.5" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-            <path d="M1.5 2L9 8L16.5 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
-    </header>
+      </div>, document.body
+    )}
+    </div>
   )
 }

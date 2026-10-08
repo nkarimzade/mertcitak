@@ -1,0 +1,149 @@
+.simple-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f5f5f7;
+  isolation: isolate;
+}
+
+.simple-slider-track {
+  position: absolute;
+  inset: 0;
+}
+
+.simple-slider-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.015);
+  transition:
+    opacity 0.7s ease,
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.simple-slider-image.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.simple-slider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 38%),
+    linear-gradient(0deg, rgba(15, 23, 42, 0.14), transparent 42%);
+}
+
+.simple-slider-controls {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.simple-slider-button {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.simple-slider-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.simple-slider-button:hover {
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.16);
+  transform: translateY(-1px);
+}
+
+.simple-slider-button:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.simple-slider-button:focus-visible,
+.simple-slider-dot:focus-visible {
+  outline: 2px solid #111827;
+  outline-offset: 3px;
+}
+
+
+
+.simple-slider-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.28);
+  cursor: pointer;
+  transition:
+    width 0.25s ease,
+    background 0.25s ease;
+}
+
+.simple-slider-dot.is-active {
+  width: 24px;
+  background: #111827;
+}
+
+@media (max-width: 768px) {
+  .simple-slider-controls {
+    left: 12px;
+    right: 12px;
+  }
+
+  .simple-slider-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .simple-slider-button svg {
+    width: 19px;
+    height: 19px;
+  }
+
+ 
+}
+
+@media (max-width: 480px) {
+  .simple-slider-button {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-slider-image,
+  .simple-slider-button,
+  .simple-slider-dot {
+    transition: none;
+  }
+}

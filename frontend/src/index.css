@@ -91,7 +91,35 @@ body {
 [data-reveal-delay="5"] { transition-delay: 0.40s; }
 [data-reveal-delay="6"] { transition-delay: 0.48s; }
 
+[data-reveal="words"] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+.text-reveal-word {
+  display: inline-block;
+  max-width: 100%;
+  font-style: normal;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  transform: translateY(0.55em);
+  transition: opacity 650ms ease, transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--word-delay, 0ms);
+}
+
+[data-reveal="words"].is-revealed .text-reveal-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .text-reveal-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;

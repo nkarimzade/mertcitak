@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
+import { FaTooth, FaWhatsapp } from 'react-icons/fa6'
+import { FiPhone } from 'react-icons/fi'
 import './ClinicVideoScroll.css'
 
 const LINE_1_FULL = 'Her gülüş, yeni bir başlangıç.'
@@ -9,8 +10,6 @@ const LINE_2_FULL = LINE_2_PREFIX + LINE_2_HIGHLIGHT
 
 export default function ClinicVideoScroll() {
   const sectionRef = useRef(null)
-  const frameRef = useRef(null)
-  const viewportRef = useRef(null)
   const [scrollProgress, setScrollProgress] = useState(0)
 
   // Calmer typewriter character state
@@ -67,15 +66,14 @@ export default function ClinicVideoScroll() {
     let animId
     let targetProgress = 0
     let currentProgress = 0
-    let targetExpand = 0
-    let currentExpand = 0
-
-    const isMobile = () => window.innerWidth <= 880
 
     const calculateProgress = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
+      // Match the frame directly to scroll so it is edge-to-edge at the sticky boundary.
+      const entry = Math.min(Math.max(1 - rect.top / (windowHeight * 0.5), 0), 1)
+      sectionRef.current.style.setProperty('--video-entry', String(entry))
       const totalScrollable = rect.height - windowHeight
       if (totalScrollable <= 0) return
 
@@ -84,24 +82,16 @@ export default function ClinicVideoScroll() {
       const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1)
       targetProgress = progress
 
-      // İlk başta paddingli kart olarak başlar, scrolle geldikçe (ilk %14'lük dilimde) tam ekrana genişler
-      if (rect.top > 0) {
-        targetExpand = 0
-      } else {
-        // Scrolle başlayınca pürüzsüzce %100 tam ekranı kaplayacak şekilde expand 1'e ulaşır
-        targetExpand = Math.min(progress / 0.14, 1)
-      }
     }
 
     const updateLoop = () => {
       // Gentle, luxurious lerp for calm, premium pacing
       currentProgress += (targetProgress - currentProgress) * 0.075
-      currentExpand += (targetExpand - currentExpand) * 0.12
 
       setScrollProgress(currentProgress)
 
       // Typewriter calculations:
-      // Phase 1 (0.00 - 0.06): Section entry & card expansion
+      // Phase 1 (0.00 - 0.06): Section entry
       // Phase 2 (0.06 - 0.38): Line 1 types calmly
       // Phase 3 (0.38 - 0.52): Extended pause so user can comfortably read Line 1
       // Phase 4 (0.52 - 0.86): Line 2 types calmly
@@ -132,32 +122,6 @@ export default function ClinicVideoScroll() {
 
       setTypedChars1(Math.round(chars1Ref.current))
       setTypedChars2(Math.round(chars2Ref.current))
-
-      if (frameRef.current && viewportRef.current) {
-        const mobile = isMobile()
-        const initialPadY = mobile ? 16 : 24
-        const initialPadX = mobile ? 12 : 36
-        const initialRadius = mobile ? 22 : 28
-
-        // Scrolle gelince padding ve border-radius 0'a iner, tüm ekranı kaplar
-        const padFactor = Math.max(0, 1 - currentExpand)
-
-        if (padFactor <= 0.005) {
-          frameRef.current.style.padding = '0px'
-          viewportRef.current.style.borderRadius = '0px'
-          viewportRef.current.style.boxShadow = 'none'
-        } else {
-          const padY = (padFactor * initialPadY).toFixed(1)
-          const padX = (padFactor * initialPadX).toFixed(1)
-          const radius = (padFactor * initialRadius).toFixed(1)
-
-          frameRef.current.style.padding = `${padY}px ${padX}px`
-          viewportRef.current.style.borderRadius = `${radius}px`
-
-          const shadowAlpha = (padFactor * 0.22).toFixed(3)
-          viewportRef.current.style.boxShadow = `0 20px 50px -12px rgba(15, 23, 42, ${shadowAlpha}), 0 0 0 1px rgba(0, 0, 0, ${(padFactor * 0.08).toFixed(3)})`
-        }
-      }
 
       animId = requestAnimationFrame(updateLoop)
     }
@@ -193,8 +157,8 @@ export default function ClinicVideoScroll() {
   return (
     <section className="clinic-video-scroll-track" ref={sectionRef} id="clinic-video">
       {/* Sticky Fullscreen Frame */}
-      <div className="clinic-video-sticky-frame" ref={frameRef}>
-        <div className="clinic-video-viewport" ref={viewportRef}>
+      <div className="clinic-video-sticky-frame">
+        <div className="clinic-video-viewport">
           {/* Background Dual-Video Seamless Looper */}
           <video
             ref={video1Ref}
@@ -212,43 +176,22 @@ export default function ClinicVideoScroll() {
             playsInline
           />
 
-          {/* Top Floating Glass Header */}
-          <div className="clinic-video-floating-nav">
-            {/* Left: Glass Circle Brand Badge */}
-            <div className="video-glass-circle-btn" title="Mert Çıtak Diş Kliniği">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C9.5 2 7.5 3.5 7 6C6.5 8.5 7 11.5 7.5 14.5C8 17.5 9 22 10.5 22C11.5 22 12 19 12 17C12 19 12.5 22 13.5 22C15 22 16 17.5 16.5 14.5C17 11.5 17.5 8.5 17 6C16.5 3.5 14.5 2 12 2Z" />
-              </svg>
-            </div>
-
-            {/* Right: Glass Capsule Pill with Nav Links & Social Icons */}
-            <div className="video-glass-pill-nav">
-              <a href="#about" className="video-pill-link">
-                Hakkımızda
+          <div className="video-corner-navigation">
+            <a className="video-clinic-mark" href="#home" aria-label="Dt. Mert Çıtak Diş Kliniği, ana sayfa" title="Ana sayfa">
+              <FaTooth aria-hidden="true" />
+            </a>
+            <nav className="video-glass-navigation" aria-label="Video bölüm menüsü">
+              <div className="video-glass-links">
+                <a href="#treatments">Tedaviler</a>
+                <a href="#team">Ekibimiz</a>
+              </div>
+              <a className="video-glass-icon" href="tel:+905452011918" aria-label="Kliniği ara" title="Kliniği ara">
+                <FiPhone aria-hidden="true" />
               </a>
-              <a href="#gallery" className="video-pill-link">
-                Galeri
+              <a className="video-glass-icon" href="https://wa.me/905452011918" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişim" title="WhatsApp ile iletişim">
+                <FaWhatsapp aria-hidden="true" />
               </a>
-              <span className="video-pill-divider" />
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="video-pill-social-link"
-                aria-label="Instagram"
-              >
-                <FaInstagram size={16} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="video-pill-social-link"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedinIn size={15} />
-              </a>
-            </div>
+            </nav>
           </div>
 
           {/* 2-Line Editorial Typography - Typewriter "Mesaj Yazıyor" Effect on Scroll */}
@@ -261,35 +204,29 @@ export default function ClinicVideoScroll() {
           >
             <div className="reference-headline-block">
               {/* Line 1: Her gülüş, yeni bir başlangıç. */}
-              <h2 className="reference-line reference-line-1">
-                {typedChars1 === 0 && !showCursorLine1 ? (
-                  <span className="typewriter-ghost" aria-hidden="true">&nbsp;</span>
-                ) : (
-                  <>
+              <h2 className="reference-line reference-line-1" aria-label={LINE_1_FULL}>
+                <span className="typewriter-measure" aria-hidden="true">{LINE_1_FULL}</span>
+                <span className="typewriter-visible" aria-hidden="true">
                     <span>{LINE_1_FULL.slice(0, typedChars1)}</span>
                     {showCursorLine1 && (
                       <span className="typewriter-cursor" aria-hidden="true">
                         |
                       </span>
                     )}
-                  </>
-                )}
+                </span>
               </h2>
 
               {/* Line 2: Gülüşünüz, en değerli imzanız. */}
-              <h2 className="reference-line reference-line-2">
-                {typedChars2 === 0 && !showCursorLine2 ? (
-                  <span className="typewriter-ghost" aria-hidden="true">&nbsp;</span>
-                ) : (
-                  <>
+              <h2 className="reference-line reference-line-2" aria-label={LINE_2_FULL}>
+                <span className="typewriter-measure" aria-hidden="true">{LINE_2_FULL}</span>
+                <span className="typewriter-visible" aria-hidden="true">
                     <span>{LINE_2_FULL.slice(0, typedChars2)}</span>
                     {showCursorLine2 && (
                       <span className="typewriter-cursor" aria-hidden="true">
                         |
                       </span>
                     )}
-                  </>
-                )}
+                </span>
               </h2>
             </div>
           </div>

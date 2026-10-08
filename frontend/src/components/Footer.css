@@ -1,0 +1,68 @@
+.clinic-footer {
+  background: #fff;
+  color: #242424;
+  border-top: 1px solid #e7e7e7;
+  padding: 64px 48px 0;
+}
+
+.clinic-footer-inner { max-width: 1240px; margin: 0 auto; }
+.clinic-footer-grid { display: grid; grid-template-columns: 1.25fr 0.8fr 1fr; gap: 64px; padding-bottom: 56px; }
+.clinic-footer-logo { display: inline-block; margin-bottom: 16px; }
+.clinic-footer-logo img { display: block; width: 80px; height: 80px; object-fit: contain; }
+.clinic-footer-name { font-size: 32px; font-weight: 500; line-height: 1.35; letter-spacing: 0; }
+.clinic-footer-name > span { color: #8a6a28; }
+.clinic-footer-description { font-size: 13px; color: #737373; line-height: 1.9; margin-top: 20px; }
+.clinic-footer-label { font-size: 11px; font-weight: 500; line-height: 1.7; color: #8a6a28; margin-bottom: 26px; }
+.clinic-footer-navigation, .clinic-footer-contact { padding-top: 24px; min-width: 0; }
+.clinic-footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.clinic-footer-links a { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 210px; min-height: 40px; font-size: 14px; text-decoration: none; color: #4e4e4e; }
+.clinic-footer-links svg { width: 15px; height: 15px; color: #aaa; flex-shrink: 0; transition: transform 180ms ease, color 180ms ease; }
+.clinic-footer-phone { display: flex; align-items: center; gap: 12px; width: fit-content; font-size: 22px; font-weight: 500; line-height: 1.5; color: #252525; text-decoration: none; margin-bottom: 20px; }
+.clinic-footer-phone svg { width: 18px; height: 18px; color: #8a6a28; flex-shrink: 0; }
+.clinic-footer-contact address { font-size: 13px; font-style: normal; color: #737373; line-height: 1.9; overflow-wrap: anywhere; }
+.clinic-footer-contact-actions { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid #ededed; margin-top: 24px; padding-top: 16px; }
+.clinic-footer-map { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; color: #3f3f3f; text-decoration: none; }
+.clinic-footer-map svg { width: 16px; height: 16px; color: #8a6a28; }
+.clinic-footer-whatsapp { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #e5e9e6; border-radius: 50%; color: #387e6e; text-decoration: none; background: #fff; transition: background 180ms ease; flex-shrink: 0; }
+.clinic-footer-whatsapp svg { width: 22px; height: 22px; }
+.clinic-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 20px 0; border-top: 1px solid #e7e7e7; }
+.clinic-footer-bottom p { font-size: 11px; line-height: 1.8; color: #888; }
+.clinic-footer-top { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: #555; font-size: 12px; text-decoration: none; flex-shrink: 0; }
+.clinic-footer-top svg { width: 18px; height: 18px; color: #8a6a28; }
+.clinic-footer a { transition: color 180ms ease; }
+.clinic-footer a:focus-visible { outline: 2px solid #8a6a28; outline-offset: 5px; }
+
+@media (hover: hover) {
+  .clinic-footer a:hover { color: #8a6a28; }
+  .clinic-footer-links a:hover svg { transform: translate(2px, -2px); color: #8a6a28; }
+  .clinic-footer-whatsapp:hover { background: #f2f7f4; color: #245b49; }
+}
+
+@media (max-width: 1000px) {
+  .clinic-footer { padding: 48px 32px 0; }
+  .clinic-footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .clinic-footer-brand { grid-column: 1 / -1; }
+  .clinic-footer-navigation, .clinic-footer-contact { padding-top: 0; }
+}
+
+@media (max-width: 600px) {
+  .clinic-footer { padding: 40px 24px 0; }
+  .clinic-footer-grid { grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; }
+  .clinic-footer-name { font-size: 28px; }
+  .clinic-footer-logo img { width: 68px; height: 68px; }
+  .clinic-footer-label { margin-bottom: 16px; }
+  .clinic-footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; }
+  .clinic-footer-links a { font-size: 13px; gap: 8px; max-width: none; }
+  .clinic-footer-phone { font-size: 22px; }
+  .clinic-footer-bottom { align-items: flex-start; gap: 16px; }
+  .clinic-footer-bottom p { max-width: 230px; }
+}
+
+@media (max-width: 360px) {
+  .clinic-footer { padding-inline: 20px; }
+  .clinic-footer-bottom { flex-direction: column; gap: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clinic-footer a, .clinic-footer-links svg { transition: none; }
+}

@@ -1,209 +1,59 @@
-import SplitText from './SplitText'
+import SimpleSlider from './SimpleSlider'
+import TextReveal from './TextReveal'
+import { FiArrowRight, FiArrowUpRight, FiMapPin } from 'react-icons/fi'
 import './Hero.css'
 
-export default function Hero({ onWatchStory }) {
-  const topSlats = [
-    'İleri Diş Hekimliği',
-    'Yüksek Kalite Ekipman & 3D Tarama',
-    'Uzman ve Samimi Kadro',
-  ]
+const items = [
+  {
+    image: '/slider_1.png',
+    alt: 'Kliniğimizin muayene odası',
+    title: 'Dt. Mert Çıtak',
+    highlight: 'Diş Kliniği',
+    description: 'Ağız ve diş sağlığınız için sizi dinleyen, tedavinizi sizinle birlikte planlayan bir yaklaşım.',
+    primary: { label: 'Tedavilerimiz', href: '#treatments' },
+    secondary: { label: 'Kliniğimizi Tanıyın', href: '#about' },
+  },
+  {
+    image: '/slider_2.png',
+    alt: 'Kliniğimizin tedavi alanı',
+    title: 'Diş sağlığınıza',
+    highlight: 'Özenli yaklaşım',
+    description: 'İlk muayeneden tedavi planına, her adımı açıkça konuşuyor; ihtiyaçlarınıza birlikte odaklanıyoruz.',
+    primary: { label: 'Tedavileri İnceleyin', href: '#treatments' },
+    secondary: { label: 'Hekimlerimiz', href: '#team' },
+  },
+  {
+    image: '/slider_3.png',
+    alt: 'Kliniğimizin karşılama alanı',
+    title: 'Kliniğimizi',
+    highlight: 'Yakından tanıyın',
+    description: 'Çankırı merkezde, aydınlık ve sakin bir klinik ortamı. Ekibimizi ve tedavi alanlarımızı keşfedin.',
+    primary: { label: 'Kliniği Keşfedin', href: '#gallery' },
+    secondary: { label: 'İletişim', href: '#contact' },
+  },
+]
 
+export default function Hero() {
   return (
-    <section className="dental-hero" id="home">
-      {/* Tek ve Ana Hero Görseli: En arkada yer alır (z-index: 1) */}
-      <div className="dental-hero-bg-layer" aria-hidden="true">
-        <img
-          src="/home/hero.webp"
-          alt="Mert Çıtak Diş Kliniği Estetik Gülüş"
-          className="dental-bg-full-img"
-        />
-      </div>
-
-      <div className="dental-hero-container">
-
-        {/* 1. Üst Bilgi Şeritleri */}
-        <div className="dental-hero-slats-wrap" role="list">
-          <div className="dental-slat-gap-cover top-cover" aria-hidden="true" />
-
-          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="1">
-            <SplitText
-              tag="span"
-              className="dental-slat-label"
-              text="Tedavi Öncesi Dijital Gülüş Planı"
-              textAlign="center"
-              delay={22}
-              duration={0.85}
-              ease="power3.out"
-              splitType="words"
-              from={{ opacity: 0, y: 16 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.05}
-              rootMargin="0px"
-              play={true}
-            />
-          </div>
-
-          <div className="dental-slat-gap-cover" aria-hidden="true" />
-
-          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="2">
-            <SplitText
-              tag="span"
-              className="dental-slat-label"
-              text="Ölçü Kaşığı Olmadan 3D Ağız Taraması"
-              textAlign="center"
-              delay={22}
-              duration={0.85}
-              ease="power3.out"
-              splitType="words"
-              from={{ opacity: 0, y: 16 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.05}
-              rootMargin="0px"
-              play={true}
-            />
-          </div>
-
-          <div className="dental-slat-gap-cover" aria-hidden="true" />
-
-          <div className="dental-hero-slat" role="listitem" data-reveal data-reveal-delay="3">
-            <SplitText
-              tag="span"
-              className="dental-slat-label"
-              text="Ağrısız Anestezi ve Birebir Hekim İlgisi"
-              textAlign="center"
-              delay={22}
-              duration={0.85}
-              ease="power3.out"
-              splitType="words"
-              from={{ opacity: 0, y: 16 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.05}
-              rootMargin="0px"
-              play={true}
-            />
-          </div>
-
-          <div className="dental-slat-gap-cover bottom-cover" aria-hidden="true" />
-        </div>
-
-        {/* 2. Ana Asimetrik Hero Kartı */}
-        <div className="dental-hero-bento">
-
-          {/* Sol Kolon: Beyaz Zeminli Alan & Devasa Tipografi */}
-          <div className="dental-bento-left">
-            <div className="dental-meta-top">
-              <SplitText
-                tag="p"
-                className="dental-lead-statement"
-                text="Eksik dişleriniz için implant, kırık ve renk sorunları için zirkonyum kaplama uyguluyoruz. Tedavi adımlarını ve süresini ilk muayenede sizinle birlikte planlıyoruz."
-                textAlign="left"
-                delay={18}
-                duration={0.85}
-                ease="power3.out"
-                splitType="words"
-                from={{ opacity: 0, y: 18 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.05}
-                rootMargin="0px"
-                play={true}
-              />
-            </div>
-
-            <div className="dental-title-group">
-              <SplitText
-                tag="span"
-                className="dental-eyebrow-tag"
-                text="MERT ÇITAK • ÇANKIRI DİŞ SAĞLIĞI VE TEDAVİSİ"
-                textAlign="left"
-                delay={20}
-                duration={0.8}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 15 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.05}
-                rootMargin="0px"
-                play={true}
-              />
-
-              <SplitText
-                tag="h1"
-                className="dental-monumental-title"
-                text={"Sağlıklı Dişler ve\nRahat Gülüşler"}
-                style={{ whiteSpace: 'pre-line' }}
-                textAlign="left"
-                delay={30}
-                duration={1.1}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 35 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.05}
-                rootMargin="0px"
-                play={true}
-              />
-
-            </div>
-
-            {/* Mobilde sağ görsel kaldırıldığında buton sol kart içinde gösterilir */}
-            <div className="dental-mobile-actions">
-              <button
-                type="button"
-                className="btn-dental-watch-story"
-                onClick={onWatchStory}
-                id="hero-mobile-video-btn"
-              >
-                <span className="dental-play-circle" aria-hidden="true">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </span>
-                <span>Kliniğimizi Keşfedin</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Sağ Kolon: Şeffaf Zemin (Tek ana hero görseli doğrudan görünür) */}
-          <div className="dental-bento-right">
-            <div className="dental-right-editorial">
-              <SplitText
-                tag="h2"
-                className="dental-statement-quote"
-                text={"Kendi dişiniz gibi\nrahat çiğneyin."}
-                style={{ whiteSpace: 'pre-line' }}
-                textAlign="right"
-                delay={30}
-                duration={1.0}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 25 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.05}
-                rootMargin="0px"
-                play={true}
-              />
-
-              <div className="dental-actions-cluster">
-                <button
-                  type="button"
-                  className="btn-dental-watch-story"
-                  onClick={onWatchStory}
-                  id="hero-video-btn"
-                >
-                  <span className="dental-play-circle" aria-hidden="true">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </span>
-                  <span>Kliniğimizi Keşfedin</span>
-                </button>
+    <section className="dental-hero" id="home" aria-labelledby="hero-title">
+      <div className="hero-slider-container">
+        <SimpleSlider
+          items={items}
+          autoplay
+          autoplayDelay={5000}
+          ariaLabel="Kliniğimizden görseller"
+          renderContent={(slide, index) => (
+            <div className="hero-copy" key={index}>
+              <span className="hero-location"><FiMapPin aria-hidden="true" /> Çankırı, İkizler İş Merkezi</span>
+              <TextReveal as="h1" id="hero-title">{slide.title}<br /><span>{slide.highlight}</span></TextReveal>
+              <p data-reveal data-reveal-delay="3">{slide.description}</p>
+              <div className="hero-actions" data-reveal data-reveal-delay="5">
+                <a className="hero-primary-link" href={slide.primary.href}>{slide.primary.label} <FiArrowRight aria-hidden="true" /></a>
+                <a className="hero-secondary-link" href={slide.secondary.href}>{slide.secondary.label} <FiArrowUpRight aria-hidden="true" /></a>
               </div>
             </div>
-          </div>
-
-        </div>
-
-
+          )}
+        />
       </div>
     </section>
   )
